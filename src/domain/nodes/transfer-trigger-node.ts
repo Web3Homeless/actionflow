@@ -79,8 +79,6 @@ export class TransferTriggerNode implements ITriggerNode {
       function checkProof(Proof calldata proof, string calldata txHash, bytes calldata txInput,
         address txTo, uint256 txValue) public {
         ITxProver(vlayerProver).verifyCopytrading(proof, txHash, txInput, txTo, txValue);
-
-
       }
     `;
   }

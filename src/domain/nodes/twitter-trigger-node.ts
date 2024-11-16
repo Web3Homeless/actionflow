@@ -1,7 +1,8 @@
 import { type ITriggerNode, type INode, type NodeType } from "../interfaces";
 
 export type TwitterTriggerNodeParams = {
-  account: string;
+  url: string;
+  stringToSearch: string;
 };
 
 export class TwitterTriggerNode implements ITriggerNode {
@@ -17,22 +18,34 @@ export class TwitterTriggerNode implements ITriggerNode {
   }
 
   getContractPreDeclarations(): string {
-    throw new Error("Method not implemented.");
+    return `
+      interface IXProver {
+        function verifyBullishPost(Proof calldata, string memory text, string memory id, string memory bullishRegex) external;
+      }
+    `;
   }
 
   getContractStateParams(): string {
-    throw new Error("Method not implemented.");
+    return ``;
   }
 
   getContractFunctionCall(): string {
-    throw new Error("Method not implemented.");
+    return `
+      checkXProof(proof, text, id, "^.*${this.nodeParams.stringToSearch}.*$");
+    `;
   }
 
   getContractFunctionDeclaration(): string {
-    throw new Error("Method not implemented.");
+    return `
+      function checkXProof(Proof calldata proof, string memory text, string memory id, string memory bullishRegex) public {
+        IXProver(vlayerProver).verifyBullishPost(proof, text, id, bullishRegex);
+      }
+    `;
   }
 
   getContractEntrypointSignature(): string {
-    throw new Error("Method not implemented.");
+    return `
+      function entrypoint(Proof calldata proof, string memory text, string memory id) public
+    `;
   }
 }
