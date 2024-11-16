@@ -1,4 +1,5 @@
 "use client";
+
 import { wagmiAdapter, projectId } from "@/config";
 import { createAppKit } from "@reown/appkit/react";
 import { mainnet, arbitrum } from "@reown/appkit/networks";

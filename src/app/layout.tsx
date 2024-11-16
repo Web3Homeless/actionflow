@@ -4,7 +4,7 @@ import { type Metadata } from "next";
 import { headers } from "next/headers"; // added
 
 import { TRPCReactProvider } from "@/trpc/react";
-import ContextProvider from '@/context'
+import ContextProvider from "@/context";
 
 export const metadata: Metadata = {
   title: "Create T3 App",
@@ -12,10 +12,7 @@ export const metadata: Metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
-export default async function RootLayout({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
-  
+export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const headersList = await headers();
   const cookies = headersList.get("cookie");
 
@@ -23,9 +20,7 @@ export default async function RootLayout({
     <html lang="en" className={`${lufga.variable}`}>
       <body>
         <TRPCReactProvider>
-          <ContextProvider cookies={cookies}>
-            {children}
-          </ContextProvider>
+          <ContextProvider cookies={cookies}>{children}</ContextProvider>
         </TRPCReactProvider>
       </body>
     </html>
