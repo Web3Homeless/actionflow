@@ -6,6 +6,7 @@ import { solidity } from "@replit/codemirror-lang-solidity";
 import { useWorkflowStore } from "@/store/workflowStore";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+
 import {
   AlertDialog,
   AlertDialogAction,
@@ -17,21 +18,27 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { useAccount, useConnect } from "wagmi";
+
+import { waitForTransactionReceipt } from "@wagmi/core";
+import { useAccount, useConnect, usePublicClient, useWaitForTransactionReceipt } from "wagmi";
 import { deployContract } from "@wagmi/core";
 import { mainnet } from "wagmi/chains";
 import { config } from "@/config";
 
 // Worker ref
+
 const extensions = [solidity];
 
 type CompilationData = {
   errors: any[];
+
   sources: any;
+
   contracts: {
     [fileName: string]: {
       [contractName: string]: {
         abi: any[];
+
         evm: { bytecode: { object: string } };
       };
     };
@@ -43,18 +50,21 @@ export default function CodeEditor() {
   const workerRef = useRef<Worker | null>(null);
   const { toast } = useToast();
   const { address, isConnected } = useAccount();
+  const publicClient = usePublicClient();
   const [deploying, setDeploying] = useState(false);
-
   const isDisabledDeploy = (bytecode as CompilationData).errors != undefined || bytecode == "";
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       // Create the worker only on the client side
+
       workerRef.current = new Worker(new URL("./solidityWorker.js", import.meta.url));
 
       workerRef.current.addEventListener("message", (event) => {
         const { output } = event.data;
+
         const outputData = output as CompilationData;
+
         setCompiledBytecode(output);
 
         if (outputData.errors) {
@@ -93,31 +103,50 @@ export default function CodeEditor() {
         description: "Please connect your wallet before deploying.",
         variant: "destructive",
       });
+
       return;
     }
 
-    const contract = bytecode.contracts[0];
+    try {
+      const contract = bytecode.contracts[0];
 
-    console.log(contract);
-    console.log(bytecode);
-    console.log(bytecode.contracts.contract);
-    console.log(bytecode.contracts.contract.ActionFlowContract);
-    console.log(JSON.stringify(bytecode.contracts.contract.ActionFlowContract.abi));
+      console.log(contract);
+      console.log(bytecode);
+      console.log(bytecode.contracts.contract);
+      console.log(bytecode.contracts.contract.ActionFlowContract);
+      console.log(JSON.stringify(bytecode.contracts.contract.ActionFlowContract.abi));
+      const c = bytecode.contracts.contract.ActionFlowContract;
 
-    const c = bytecode.contracts.contract.ActionFlowContract;
+      // Full bytecode (includes metadata and constructor)
 
-    // Full bytecode (includes metadata and constructor)
-    const fullBytecode = c.evm.bytecode.object;
+      const fullBytecode = c.evm.bytecode.object;
 
-    console.log(fullBytecode);
+      console.log(fullBytecode);
+      console.log("0x" + fullBytecode);
 
-    console.log("0x" + fullBytecode);
+      setDeploying(true);
 
-    await deployContract(config, {
-      abi: c.abi,
-      args: [],
-      bytecode: "0x" + fullBytecode,
-    });
+      const hash = await deployContract(config, {
+        abi: c.abi,
+        args: [],
+        bytecode: "0x" + fullBytecode,
+      });
+
+      await waitForTransactionReceipt(config, {
+        hash: hash,
+      });
+
+      toast({
+        title: "Contract deployed successfully!",
+      });
+    } catch {
+      toast({
+        title: "Something went wrong...",
+        variant: "destructive",
+      });
+    } finally {
+      setDeploying(false);
+    }
   };
 
   return (
@@ -130,24 +159,30 @@ export default function CodeEditor() {
           onChange={(value) => setCode(value)}
         />
       </div>
+
       <Button onClick={compileContract} variant="outline">
         COMPILE
       </Button>
+
       <AlertDialog>
         <AlertDialogTrigger asChild>
           <Button disabled={isDisabledDeploy || deploying} variant="outline">
             {deploying ? "DEPLOYING..." : "DEPLOY"}
           </Button>
         </AlertDialogTrigger>
+
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>Вы уверены?</AlertDialogTitle>
+
             <AlertDialogDescription>
               Если эту хуйню задеплоить и вас заскамят - мы не виноваты
             </AlertDialogDescription>
           </AlertDialogHeader>
+
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
+
             <AlertDialogAction onClick={async () => await deploy()}>
               {deploying ? "Deploying..." : "Deploy"}
             </AlertDialogAction>
