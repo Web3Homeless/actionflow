@@ -5,6 +5,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        violet: "#8874E3",
+        yellow: "#F3B440",
+        red: "#FF603A",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -43,6 +46,9 @@ module.exports = {
         lg: `var(--radius)`,
         md: `calc(var(--radius) - 2px)`,
         sm: "calc(var(--radius) - 4px)",
+      },
+      fontFamily: {
+        lufga: ["var(--lufga)"],
       },
     },
   },
