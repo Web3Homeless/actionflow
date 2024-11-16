@@ -2,6 +2,7 @@ import "@/app/globals.css";
 import { lufga } from "./fonts";
 import { type Metadata } from "next";
 import { headers } from "next/headers"; // added
+import { Toaster } from "@/components/ui/toaster";
 
 import { TRPCReactProvider } from "@/trpc/react";
 import ContextProvider from "@/context";
@@ -22,6 +23,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         <TRPCReactProvider>
           <ContextProvider cookies={cookies}>{children}</ContextProvider>
         </TRPCReactProvider>
+        <Toaster />
       </body>
     </html>
   );
