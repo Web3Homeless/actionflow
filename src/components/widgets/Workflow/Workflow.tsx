@@ -14,17 +14,7 @@ export default function Workflow({
 
   return (
     <div className={"bg-white flex flex-col rounded-[0.521vw] w-full h-full overflow-hidden"}>
-      <div
-        className={"flex relative flex-col w-full p-[0.781vw] h-full"}
-        // style={{
-        //   backgroundColor: "white",
-        //   opacity: 1,
-        //   backgroundImage:
-        //     "radial-gradient(#F5F5F5 1.55px, transparent 1.55px), radial-gradient(#FFFFFF 1.55px, #FFFFFF 1.55px)",
-        //   backgroundSize: "24px 24px",
-        //   backgroundPosition: "0 0, 12px 12px",
-        // }}
-      >
+      <div className={"flex relative flex-col w-full p-[0.781vw] h-full"}>
         <div
           className={
             "w-full z-[1] p-[0.781vw] absolute left-0 top-0 flex flex-row justify-between items-center"

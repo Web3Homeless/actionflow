@@ -3,13 +3,13 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { TokensType } from "@/lib/utils";
 import { useState } from "react";
 
-export function SendTokensNode() {
+export function SendTokensNodeTrigger() {
   const [currentTokenType, setCurrentTokenType] = useState<string>();
   const [amount, setAmount] = useState<number>();
   const [userAddress, setUserAddress] = useState<string>("");
 
   return (
-    <div className={"rounded-[0.521vw] relative p-[0.781vw] flex flex-col bg-violet"}>
+    <div className={"rounded-[0.521vw] relative p-[0.781vw] flex flex-col bg-yellow"}>
       <div className={"flex mb-[0.625vw] flex-row items-center gap-[0.521vw]"}>
         <svg
           width="22"
@@ -97,6 +97,7 @@ export function SendTokensNode() {
         </div>
       </div>
       <Handle type={"target"} position={Position.Left} />
+      <Handle type={"source"} position={Position.Right} />
     </div>
   );
 }

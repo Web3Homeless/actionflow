@@ -7,7 +7,7 @@ import { Handle, Position } from "@xyflow/react";
 //     data: { color: "violet" | "yellow" | "red"; handle: ""; keywords: "" };
 // }
 
-export function TwitterPostNode() {
+export function TwitterPostNodeTrigger() {
   const [twitterHandle, setTwitterHandle] = useState<string>("");
   const [twitterKeywords, setTwitterKeywords] = useState<string>("");
 
@@ -68,6 +68,7 @@ export function TwitterPostNode() {
           />
         </div>
       </div>
+      <Handle type={"target"} position={Position.Left} />
       <Handle type={"source"} position={Position.Right} />
     </div>
   );

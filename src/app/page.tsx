@@ -6,7 +6,7 @@ import Header from "@/components/widgets/Header";
 import Modules from "@/components/widgets/Modules";
 import Workflow from "@/components/widgets/Workflow";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { baseNodes } from "@/components/editor2/lib";
 import type { Node } from "@xyflow/react";
 

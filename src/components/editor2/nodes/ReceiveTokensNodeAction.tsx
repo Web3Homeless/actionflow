@@ -3,7 +3,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { TokensType } from "@/lib/utils";
 import { useState } from "react";
 
-export function ReceiveTokensNode() {
+export function ReceiveTokensNodeAction() {
   const [currentTokenType, setCurrentTokenType] = useState<string>();
   const [amount, setAmount] = useState<number>();
   const [userAddress, setUserAddress] = useState<string>("");
@@ -78,6 +78,7 @@ export function ReceiveTokensNode() {
         >
           <input
             className={"w-full outline-0"}
+            type={"number"}
             placeholder={"Amount..."}
             value={amount}
             onChange={(e) => setAmount(Number(e.target.value))}
@@ -97,6 +98,7 @@ export function ReceiveTokensNode() {
         </div>
       </div>
       <Handle type={"target"} position={Position.Left} />
+      <Handle type={"source"} position={Position.Right} />
     </div>
   );
 }

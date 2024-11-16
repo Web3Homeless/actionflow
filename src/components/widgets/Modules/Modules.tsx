@@ -10,7 +10,15 @@ const ModuleBtn = ({
   onClick,
   icon,
 }: {
-  id: "twitterPost" | "sendTokens" | "receiveTokens" | "swapTokens" | "bridgeUSDC";
+  id:
+    | "twitterPostTrigger"
+    | "sendTokensAction"
+    | "sendTokensTrigger"
+    | "receiveTokensAction"
+    | "receiveTokensTrigger"
+    | "swapTokensAction"
+    | "swapTokensTrigger"
+    | "bridgeUSDCAction";
   name: string;
   type: "action" | "trigger";
   onClick: () => void;
@@ -31,13 +39,21 @@ const ModuleBtn = ({
 };
 
 const actions: {
-  id: "twitterPost" | "sendTokens" | "receiveTokens" | "swapTokens" | "bridgeUSDC";
+  id:
+    | "twitterPostTrigger"
+    | "sendTokensAction"
+    | "sendTokensTrigger"
+    | "receiveTokensAction"
+    | "receiveTokensTrigger"
+    | "swapTokensAction"
+    | "swapTokensTrigger"
+    | "bridgeUSDCAction";
   name: string;
   type: "action" | "trigger";
   icon: ReactNode;
 }[] = [
   {
-    id: "swapTokens",
+    id: "swapTokensAction",
     name: "Swap Token",
     type: "action",
     icon: (
@@ -88,7 +104,7 @@ const actions: {
     ),
   },
   {
-    id: "sendTokens",
+    id: "sendTokensAction",
     name: "Send Tokens",
     type: "action",
     icon: (
@@ -118,7 +134,7 @@ const actions: {
     ),
   },
   {
-    id: "bridgeUSDC",
+    id: "bridgeUSDCAction",
     name: "Bridge USDC",
     type: "action",
     icon: (
@@ -142,13 +158,21 @@ const actions: {
 ];
 
 const triggers: {
-  id: "twitterPost" | "sendTokens" | "receiveTokens" | "swapTokens" | "bridgeUSDC";
+  id:
+    | "twitterPostTrigger"
+    | "sendTokensAction"
+    | "sendTokensTrigger"
+    | "receiveTokensAction"
+    | "receiveTokensTrigger"
+    | "swapTokensAction"
+    | "swapTokensTrigger"
+    | "bridgeUSDCAction";
   name: string;
   type: "action" | "trigger";
   icon: ReactNode;
 }[] = [
   {
-    id: "twitterPost",
+    id: "twitterPostTrigger",
     name: "Twitter Post",
     type: "trigger",
     icon: (
@@ -180,6 +204,108 @@ const triggers: {
       </svg>
     ),
   },
+  {
+    id: "swapTokensTrigger",
+    name: "Swap Token",
+    type: "trigger",
+    icon: (
+      <svg
+        width="18"
+        height="18"
+        viewBox="0 0 18 18"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={"w-[0.938vw]"}
+      >
+        <path
+          d="M1 13.8H2.12C3.16 13.8 4.12 13.32 4.76 12.44L9.64001 5.55995C10.2 4.67995 11.24 4.19995 12.28 4.19995H17"
+          stroke="white"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M13.8015 1L17.0015 4.2L13.8015 7.4"
+          stroke="white"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M1 4.19995H2.52C3.72 4.19995 4.84 4.91995 5.4 5.95995"
+          stroke="white"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M16.999 13.8H12.279C11.239 13.8 10.199 13.24 9.63901 12.36L9.23901 11.72"
+          stroke="white"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M13.8015 10.6L17.0015 13.8L13.8015 17"
+          stroke="white"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    ),
+  },
+  {
+    id: "receiveTokensTrigger",
+    name: "Receive Token",
+    type: "trigger",
+    icon: (
+      <svg
+        width="18"
+        height="18"
+        viewBox="0 0 18 18"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={"w-[0.938vw]"}
+      >
+        <path
+          d="M1 13.8H2.12C3.16 13.8 4.12 13.32 4.76 12.44L9.64001 5.55995C10.2 4.67995 11.24 4.19995 12.28 4.19995H17"
+          stroke="white"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M13.8015 1L17.0015 4.2L13.8015 7.4"
+          stroke="white"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M1 4.19995H2.52C3.72 4.19995 4.84 4.91995 5.4 5.95995"
+          stroke="white"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M16.999 13.8H12.279C11.239 13.8 10.199 13.24 9.63901 12.36L9.23901 11.72"
+          stroke="white"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M13.8015 10.6L17.0015 13.8L13.8015 17"
+          stroke="white"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    ),
+  },
 ];
 
 export default function Modules({
@@ -190,48 +316,89 @@ export default function Modules({
   setNodes: (nodes: Node[]) => void;
 }) {
   const updateNodes = (
-    id: "twitterPost" | "sendTokens" | "receiveTokens" | "swapTokens" | "bridgeUSDC",
+    id:
+      | "twitterPostTrigger"
+      | "sendTokensAction"
+      | "sendTokensTrigger"
+      | "receiveTokensAction"
+      | "receiveTokensTrigger"
+      | "swapTokensAction"
+      | "swapTokensTrigger"
+      | "bridgeUSDCAction",
   ) => {
     switch (id) {
-      case "twitterPost":
+      case "twitterPostTrigger":
         setNodes([
           ...nodes,
           {
             id: `twitterPost-${Math.floor(Math.random() * 10000)}`,
-            type: "twitterPost",
+            type: "twitterPostTrigger",
             position: { x: 0, y: 0 },
             data: { handle: "", keywords: "" },
           },
         ]);
         break;
-      case "sendTokens":
+      case "sendTokensAction":
         setNodes([
           ...nodes,
           {
             id: `sendTokens-${Math.floor(Math.random() * 10000)}`,
-            type: "sendTokens",
+            type: "sendTokensAction",
             position: { x: 100, y: 0 },
             data: { type: TokensType.ETH, walletAddress: "", amount: 0 },
           },
         ]);
         break;
-      case "receiveTokens":
+      case "sendTokensTrigger":
+        setNodes([
+          ...nodes,
+          {
+            id: `sendTokens-${Math.floor(Math.random() * 10000)}`,
+            type: "sendTokensTrigger",
+            position: { x: 100, y: 0 },
+            data: { type: TokensType.ETH, walletAddress: "", amount: 0 },
+          },
+        ]);
+        break;
+      case "receiveTokensAction":
         setNodes([
           ...nodes,
           {
             id: `receiveTokens-${Math.floor(Math.random() * 10000)}`,
-            type: "receiveTokens",
+            type: "receiveTokensAction",
             position: { x: 200, y: 0 },
             data: { type: TokensType.ETH, walletAddress: "", amount: 0 },
           },
         ]);
         break;
-      case "swapTokens":
+      case "receiveTokensTrigger":
+        setNodes([
+          ...nodes,
+          {
+            id: `receiveTokens-${Math.floor(Math.random() * 10000)}`,
+            type: "receiveTokensTrigger",
+            position: { x: 200, y: 0 },
+            data: { type: TokensType.ETH, walletAddress: "", amount: 0 },
+          },
+        ]);
+        break;
+      case "swapTokensAction":
         setNodes([
           ...nodes,
           {
             id: `swapToken-${Math.floor(Math.random() * 10000)}`,
-            type: "swapTokens",
+            type: "swapTokensAction",
+            position: { x: 300, y: 0 },
+            data: { fromType: TokensType.ETH, toType: TokensType.USDT, amount: 0 },
+          },
+        ]);
+        break;
+      case "swapTokensTrigger":
+        setNodes([
+          ...nodes,
+          {
+            id: `swapToken-${Math.floor(Math.random() * 10000)}`,
+            type: "swapTokensTrigger",
             position: { x: 300, y: 0 },
             data: { fromType: TokensType.ETH, toType: TokensType.USDT, amount: 0 },
           },

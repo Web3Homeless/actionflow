@@ -12,14 +12,18 @@ import {
   type Node,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
-import { TwitterPostNode } from "@/components/editor2/nodes/TwitterPostNode";
-import { SendTokensNode } from "@/components/editor2/nodes/SendTokensNode";
-import { ReceiveTokensNode } from "@/components/editor2/nodes/ReceiveTokensNode";
+import { TwitterPostNodeTrigger } from "@/components/editor2/nodes/TwitterPostNodeTrigger";
+import { SendTokensNodeAction } from "@/components/editor2/nodes/SendTokensNodeAction";
+import { ReceiveTokensNodeAction } from "@/components/editor2/nodes/ReceiveTokensNodeAction";
+import { SendTokensNodeTrigger } from "@/components/editor2/nodes/SendTokensNodeTrigger";
+import { ReceiveTokensNodeTrigger } from "@/components/editor2/nodes/ReceiveTokensNodeTrigger";
 
 const nodeTypes = {
-  twitterPost: TwitterPostNode,
-  sendTokens: SendTokensNode,
-  receiveTokens: ReceiveTokensNode,
+  twitterPostTrigger: TwitterPostNodeTrigger,
+  sendTokensAction: SendTokensNodeAction,
+  sendTokensTrigger: SendTokensNodeTrigger,
+  receiveTokensAction: ReceiveTokensNodeAction,
+  receiveTokensTrigger: ReceiveTokensNodeTrigger,
   // swapTokens: SwapTokensNode,
 };
 
