@@ -1,5 +1,5 @@
 import { getFinalContractCode } from "./const";
-import { addIndentation, dedent, indentTo } from "./helpers";
+import { indentTo } from "./format";
 import { type ITriggerNode, type INode, type IOnchainActionNode } from "./interfaces";
 
 export function generateCode(triggerNode: ITriggerNode): string {
