@@ -1,29 +1,30 @@
-'use client';
-import { wagmiAdapter, projectId } from '@/config'
-import { createAppKit } from '@reown/appkit/react' 
-import { mainnet, arbitrum } from '@reown/appkit/networks'
+"use client";
+import { wagmiAdapter, projectId } from "@/config";
+import { createAppKit } from "@reown/appkit/react";
+import { mainnet, arbitrum } from "@reown/appkit/networks";
 
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import React, { type ReactNode } from 'react'
-import { cookieToInitialState, WagmiProvider, type Config } from 'wagmi'
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import React, { type ReactNode } from "react";
+import { cookieToInitialState, WagmiProvider, type Config } from "wagmi";
 
 // Set up queryClient
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 
 if (!projectId) {
-  throw new Error('Project ID is not defined')
+  throw new Error("Project ID is not defined");
 }
 
 // Set up metadata
-const metadata = { //this is optional
+const metadata = {
+  //this is optional
   name: "appkit-example",
   description: "AppKit Example - EVM",
   url: "https://exampleapp.com", // origin must match your domain & subdomain
-  icons: ["https://avatars.githubusercontent.com/u/37784886"]
-}
+  icons: ["https://avatars.githubusercontent.com/u/37784886"],
+};
 
 // Create the modal
-const modal = createAppKit({
+export const modal = createAppKit({
   adapters: [wagmiAdapter],
   projectId,
   networks: [mainnet, arbitrum],
@@ -31,20 +32,20 @@ const modal = createAppKit({
   features: {
     analytics: true, // Optional - defaults to your Cloud configuration
     email: true, // default to true
-    socials: ['google', 'x', 'github', 'discord', 'apple', 'facebook', 'farcaster'],
+    socials: ["google", "x", "github", "discord", "apple", "facebook", "farcaster"],
     emailShowWallets: true, // default to true
   },
-  themeMode: 'light'
-})
+  themeMode: "light",
+});
 
 function ContextProvider({ children, cookies }: { children: ReactNode; cookies: string | null }) {
-  const initialState = cookieToInitialState(wagmiAdapter.wagmiConfig as Config, cookies)
+  const initialState = cookieToInitialState(wagmiAdapter.wagmiConfig as Config, cookies);
 
   return (
     <WagmiProvider config={wagmiAdapter.wagmiConfig as Config} initialState={initialState}>
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </WagmiProvider>
-  )
+  );
 }
 
-export default ContextProvider
+export default ContextProvider;

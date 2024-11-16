@@ -9,11 +9,17 @@ import {
 } from "@/components/DropdownMenu";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
+import etherImg from "../../../../public/icons/ether.svg";
+import { useAccount } from "wagmi";
+import { formatAddress } from "@/lib/utils";
+import { modal } from "@/context";
 
 export default function Header() {
   const [dropdownPosition, setDropdownPosition] = useState("bottom");
   const [dropdownItem, setDropdownItem] = useState("BNB Transfer");
   const [leftOpen, setLeftOpen] = useState<boolean>(false);
+  const { isConnected, address } = useAccount();
 
   return (
     <header
@@ -64,7 +70,33 @@ export default function Header() {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <div className={"w-[30%]"}></div>
+      <div
+        className={
+          "w-[30%] gap-[0.781vw] flex flex-row items-center justify-center border-l border-[#DDDDDD]"
+        }
+      >
+        <div
+          className={
+            "flex flex-col justify-center items-center border bg-red/30 border-red p-[0.313vw] rounded-full"
+          }
+        >
+          <Image
+            src={etherImg}
+            alt={"ether"}
+            className={"w-full h-full object-center object-contain"}
+          />
+        </div>
+        <button
+          onClick={() => modal.open()}
+          className={
+            "border hover:opacity-80 bg-red/30 border-red py-[0.625vw] px-[2.031vw] rounded-full flex items-center justify-center"
+          }
+        >
+          <span className={"text-red text-[1.042vw] font-lufga font-medium"}>
+            {isConnected ? formatAddress(address) : "Connect wallet"}
+          </span>
+        </button>
+      </div>
     </header>
   );
 }
