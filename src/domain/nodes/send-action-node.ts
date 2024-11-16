@@ -1,7 +1,10 @@
+import { toChecksumAddress } from "../format";
 import { type INode, type IOnchainActionNode, type NodeType } from "../interfaces";
 
 export type SendNodeParams = {
   account: string;
+  token: string;
+  amount: string;
 };
 
 export class SendNode implements IOnchainActionNode {
@@ -13,6 +16,8 @@ export class SendNode implements IOnchainActionNode {
   private nodeParams: SendNodeParams;
 
   constructor(params: SendNodeParams) {
+    params.account = toChecksumAddress(params.account);
+    params.token = toChecksumAddress(params.token);
     this.nodeParams = params;
   }
 
@@ -22,25 +27,28 @@ export class SendNode implements IOnchainActionNode {
         function increment() external;
         function getCount() external view returns (uint256);
       }
+      
+      interface IERC20 {
+        function transfer(address to, uint256 value) external returns (bool);
+      }
     `;
   }
 
   getContractStateParams(): string {
-    return `
-      uint256 public sendParam1; 
-    `;
+    return "";
   }
 
   getContractFunctionCall(): string {
     return `
-      send("${this.nodeParams.account}");
+      send(address(${this.nodeParams.token}),address(${this.nodeParams.account}),${this.nodeParams.amount});
     `;
   }
 
   getContractFunctionDeclaration(): string {
     return `
-      function send(address account) public override {
-        someTransferParam1 += 1;
+      function send(address token, address account, uint256 amount) public override {
+        bool success = IERC20(token).transfer(account, amount);
+        require(success, "Token transfer failed");
       }
     `;
   }

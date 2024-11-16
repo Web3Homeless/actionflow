@@ -1,6 +1,7 @@
 import prettier from "prettier";
 // @ts-expect-error abc
 import solidityPlugin from "prettier-plugin-solidity";
+import { getAddress } from "ethers";
 
 export function dedent(str: string): string {
   const trimmedStr = str.replace(/^\n+|\n+$/g, "");
@@ -33,4 +34,8 @@ export async function formatSolidity(solidityCode: string): Promise<string> {
     parser: "solidity-parse",
     plugins: [solidityPlugin],
   });
+}
+
+export function toChecksumAddress(address: string) {
+  return getAddress(address);
 }
