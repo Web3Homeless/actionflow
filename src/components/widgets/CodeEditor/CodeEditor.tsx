@@ -89,7 +89,24 @@ export default function CodeEditor() {
       </div>
       <AlertDialog>
         <AlertDialogTrigger asChild>
-          <Button variant="outline">Show Dialog</Button>
+          <Button variant="outline">COMPILE</Button>
+        </AlertDialogTrigger>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Вы уверены?</AlertDialogTitle>
+            <AlertDialogDescription>
+              Если эту хуйню задеплоить и вас заскамят - мы не виноваты
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction onClick={compileContract}>Compile</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+      <AlertDialog>
+        <AlertDialogTrigger asChild>
+          <Button variant="outline">DEPLOY</Button>
         </AlertDialogTrigger>
         <AlertDialogContent>
           <AlertDialogHeader>

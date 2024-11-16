@@ -2,10 +2,11 @@ import { CONTRACT_TEMPLATE } from "@/domain/const";
 import { useWorkflowStore } from "@/store/workflowStore";
 import { useRete } from "rete-react-plugin";
 import { createEditor } from "@/editor/editor";
+import Canvas from "@/components/editor2/Canvas";
 
 export default function Workflow() {
   const { code, setCode } = useWorkflowStore();
-  const [ref] = useRete(createEditor);
+  //const [ref] = useRete(createEditor);
 
   return (
     <div className={"bg-white flex flex-col rounded-[0.521vw] w-full h-full overflow-hidden"}>
@@ -60,7 +61,7 @@ export default function Workflow() {
           </button>
         </div>
         <div className={"overflow-y-scroll w-full h-full"}>
-          <div ref={ref} className={"w-full h-full"} />
+          <Canvas></Canvas>
         </div>
       </div>
     </div>
