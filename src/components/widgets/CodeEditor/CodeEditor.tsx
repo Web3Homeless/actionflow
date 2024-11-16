@@ -27,6 +27,7 @@ import { config } from "@/config";
 import { api } from "@/trpc/react";
 import { TwitterTriggerNode } from "@/domain/nodes/twitter-trigger-node";
 import { SwapNode } from "@/domain/nodes/swap-action-node";
+import { CONTRACT_TEMPLATE } from "@/domain/const";
 
 // Worker ref
 
@@ -193,8 +194,8 @@ export default function CodeEditor() {
   };
 
   return (
-    <div className="w-full h-full">
-      <div className="w-full h-3/4 overflow-y-scroll">
+    <div className="w-full h-full flex flex-col justify-center items-center">
+      <div className="w-full h-full overflow-y-scroll">
         <CodeMirror
           width="100%"
           value={code}
@@ -202,36 +203,14 @@ export default function CodeEditor() {
           onChange={(value) => setCode(value)}
         />
       </div>
-
-      <Button onClick={compileContract} variant="outline">
-        COMPILE
-      </Button>
-
-      <AlertDialog>
-        <AlertDialogTrigger asChild>
-          <Button disabled={isDisabledDeploy || deploying} variant="outline">
-            {deploying ? "DEPLOYING..." : "DEPLOY"}
-          </Button>
-        </AlertDialogTrigger>
-
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Вы уверены?</AlertDialogTitle>
-
-            <AlertDialogDescription>
-              Если эту хуйню задеплоить и вас заскамят - мы не виноваты
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-
-          <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-
-            <AlertDialogAction onClick={async () => await deploy()}>
-              {deploying ? "Deploying..." : "Deploy"}
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+      <button
+        className={
+          "flex w-[90%] my-[0.521vw] hover:opacity-80 flex-row bg-gradient-to-r from-[#FF603A] to-[#F3B440] justify-center items-center py-[0.781vw] px-[1.25vw] rounded-full gap-[0.521vw]"
+        }
+        onClick={async () => await deploy()}
+      >
+        <span className={"text-white text-[1.042vw] font-medium"}>Deploy Contract</span>
+      </button>
     </div>
   );
 }

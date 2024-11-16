@@ -33,7 +33,7 @@ export default function Home() {
           <ResizablePanel defaultSize={28} className={"h-full flex flex-col gap-[1.042vw]"}>
             <div className={"bg-white rounded-[0.521vw] h-[10%] w-full"}></div>
             <div className={"bg-white rounded-[0.521vw] h-[90%] w-full"}>
-              <CodeEditor></CodeEditor>
+              <CodeEditor />
             </div>
           </ResizablePanel>
         </ResizablePanelGroup>
