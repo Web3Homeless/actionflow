@@ -8,6 +8,34 @@ export const CONTRACT_TEMPLATE = `
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+// Proving structs for VLayer
+enum ProofMode {
+    GROTH16,
+    FAKE
+}
+
+struct Seal {
+    bytes4 verifierSelector;
+    bytes32[8] seal;
+    ProofMode mode;
+}
+
+struct CallAssumptions {
+    address proverContractAddress;
+    bytes4 functionSelector;
+    uint256 settleBlockNumber; // Block number for which assumptions was made.
+    bytes32 settleBlockHash; // Hash of the block at the specified block number.
+}
+
+struct Proof {
+    Seal seal;
+    bytes32 callGuestId;
+    uint256 length;
+    CallAssumptions callAssumptions;
+}
+// VLayer prover
+address constant vlayerProver = address(0x62167D939D60716567825d0da260335F1BEA15eb);
+
 ${PRE_CONTRACT_DECLARATIONS}
 
 contract Actionflow {
@@ -26,12 +54,6 @@ contract Actionflow {
     _;
   }
 
-  // ПОДУМАТЬ ПРО КОНСТРУКТОР
-  constructor(address _vlayer, address _rewardToken, uint256 _rewardAmount) {
-    vlayer = IVLayer(_vlayer);
-    rewardToken = IToken(_rewardToken);
-    rewardAmount = _rewardAmount;
-  }
 
   ${CONTRACT_ENTRYPOINT_SIGNATURE} {
     ${CONTRACT_ENTRYPOINT_CODE}

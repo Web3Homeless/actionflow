@@ -46,7 +46,7 @@ export class SendNode implements IOnchainActionNode {
 
   getContractFunctionDeclaration(): string {
     return `
-      function send(address token, address account, uint256 amount) public override {
+      function send(address token, address account, uint256 amount) public {
         bool success = IERC20(token).transfer(account, amount);
         require(success, "Token transfer failed");
       }
