@@ -57,3 +57,36 @@
         @apply font-sans antialiased bg-background text-foreground;
     }
 }
+
+:root {
+    --background-rgb: #F5F5F5;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-rgb: #F5F5F5;
+    }
+}
+
+body {
+    background-color: var(--background-rgb);
+}
+
+@layer utilities {
+    .text-balance {
+        text-wrap: balance;
+    }
+}
+
+body {
+    font-family: var(--museo-slab);
+}
+
+img {
+    user-drag: none;
+    -webkit-user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
