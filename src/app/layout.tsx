@@ -2,8 +2,10 @@ import "@/app/globals.css";
 
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
+import { headers } from "next/headers"; // added
 
 import { TRPCReactProvider } from "@/trpc/react";
+import ContextProvider from '@/context'
 
 export const metadata: Metadata = {
   title: "Create T3 App",
@@ -11,11 +13,21 @@ export const metadata: Metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default async function RootLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
+  
+  const headersList = await headers();
+  const cookies = headersList.get("cookie");
+
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
       <body>
-        <TRPCReactProvider>{children}</TRPCReactProvider>
+        <TRPCReactProvider>
+          <ContextProvider cookies={cookies}>
+            {children}
+          </ContextProvider>
+        </TRPCReactProvider>
       </body>
     </html>
   );
