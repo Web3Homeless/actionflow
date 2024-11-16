@@ -1,11 +1,12 @@
-module.exports = {
+// jest.config.js (ESM syntax)
+export default {
   preset: "ts-jest",
   testEnvironment: "node",
   moduleNameMapper: {
-    "^@/components/(.*)$": "<rootDir>/src/components/$1",
-    // Add any other aliases you might be using
+    "^~/(.*)$": "<rootDir>/src/$1",
   },
   transform: {
     "^.+\\.(ts|tsx)$": "ts-jest",
   },
+  testMatch: ["<rootDir>/src/tests/**/*.test.ts", "<rootDir>/src/tests/**/*.test.tsx"],
 };
