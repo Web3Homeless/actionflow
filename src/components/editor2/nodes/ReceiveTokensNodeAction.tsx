@@ -65,31 +65,6 @@ export function ReceiveTokensNodeAction() {
             </SelectItem>
           </SelectContent>
         </Select>
-        <div
-          className={
-            "w-full rounded-full py-[0.365vw] px-[0.573vw] bg-white text-black placeholder:text-[#DDDDDD] text-[0.625vw] placeholder:text-[0.625vw]"
-          }
-        >
-          <input
-            className={"w-full outline-0"}
-            type={"number"}
-            placeholder={"Amount..."}
-            value={amount}
-            onChange={(e) => setAmount(Number(e.target.value))}
-          />
-        </div>
-        <div
-          className={
-            "w-full rounded-full py-[0.365vw] px-[0.573vw] bg-white text-black placeholder:text-[#DDDDDD] text-[0.625vw] placeholder:text-[0.625vw]"
-          }
-        >
-          <input
-            className={"w-full outline-0"}
-            placeholder={"Wallet address..."}
-            value={userAddress}
-            onChange={(e) => setUserAddress(e.target.value)}
-          />
-        </div>
       </div>
       <Handle type={"target"} position={Position.Left} />
       <Handle type={"source"} position={Position.Right} />
