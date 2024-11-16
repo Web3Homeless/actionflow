@@ -213,14 +213,24 @@ export default function CodeEditor() {
           onChange={(value) => setCode(value)}
         />
       </div>
-      <button
-        className={
-          "flex w-[90%] my-[0.521vw] hover:opacity-80 flex-row bg-gradient-to-r from-[#FF603A] to-[#F3B440] justify-center items-center py-[0.781vw] px-[1.25vw] rounded-full gap-[0.521vw]"
-        }
-        onClick={async () => await deploy()}
-      >
-        <span className={"text-white text-[1.042vw] font-medium"}>Deploy Contract</span>
-      </button>
+      <div className={"flex w-[90%] flex-row justify-center items-center gap-[0.26vw]"}>
+        <button
+          className={
+            "flex w-[90%] my-[0.521vw] hover:opacity-80 flex-row bg-gradient-to-r from-[#FF603A] to-[#F3B440] justify-center items-center py-[0.781vw] px-[1.25vw] rounded-full gap-[0.521vw]"
+          }
+          onClick={async () => await deploy()}
+        >
+          <span className={"text-white text-[1.042vw] font-medium"}>Deploy</span>
+        </button>
+        <button
+          className={
+            "flex w-[90%] my-[0.521vw] hover:opacity-80 flex-row bg-gradient-to-r from-[#FF603A] to-[#F3B440] justify-center items-center py-[0.781vw] px-[1.25vw] rounded-full gap-[0.521vw]"
+          }
+          onClick={compileContract}
+        >
+          <span className={"text-white text-[1.042vw] font-medium"}>Compile</span>
+        </button>
+      </div>
     </div>
   );
 }
