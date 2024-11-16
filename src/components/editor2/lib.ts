@@ -11,13 +11,13 @@ export const baseNodes = {
   sendTokens: {
     id: "sendTokens-1",
     type: "sendTokens",
-    position: { x: 100, y: 0 },
+    position: { x: 200, y: 0 },
     data: { type: TokensType.ETH, walletAddress: "", amount: 0 },
   },
   receiveTokens: {
     id: "receiveTokens-1",
     type: "receiveTokens",
-    position: { x: 200, y: 0 },
+    position: { x: 400, y: 0 },
     data: { type: TokensType.ETH, walletAddress: "", amount: 0 },
   },
   swapTokens: {

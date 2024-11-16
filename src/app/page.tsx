@@ -13,7 +13,7 @@ import type { Node } from "@xyflow/react";
 export default function Home() {
   const [nodes, setNodes] = useState<Node[]>([
     baseNodes.twitterPost,
-    baseNodes.swapTokens,
+    baseNodes.receiveTokens,
     baseNodes.sendTokens,
   ]);
 

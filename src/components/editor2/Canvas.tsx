@@ -14,12 +14,12 @@ import {
 import "@xyflow/react/dist/style.css";
 import { TwitterPostNode } from "@/components/editor2/nodes/TwitterPostNode";
 import { SendTokensNode } from "@/components/editor2/nodes/SendTokensNode";
-import { TokensType } from "@/lib/utils";
+import { ReceiveTokensNode } from "@/components/editor2/nodes/ReceiveTokensNode";
 
 const nodeTypes = {
   twitterPost: TwitterPostNode,
   sendTokens: SendTokensNode,
-  // receiveTokens: ReceiveTokensNode,
+  receiveTokens: ReceiveTokensNode,
   // swapTokens: SwapTokensNode,
 };
 
