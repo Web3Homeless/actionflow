@@ -24,6 +24,9 @@ import { useAccount, useConnect, usePublicClient, useWaitForTransactionReceipt }
 import { deployContract } from "@wagmi/core";
 import { mainnet } from "wagmi/chains";
 import { config } from "@/config";
+import { api } from "@/trpc/react";
+import { TwitterTriggerNode } from "@/domain/nodes/twitter-trigger-node";
+import { SwapNode } from "@/domain/nodes/swap-action-node";
 
 // Worker ref
 
@@ -38,7 +41,6 @@ type CompilationData = {
     [fileName: string]: {
       [contractName: string]: {
         abi: any[];
-
         evm: { bytecode: { object: string } };
       };
     };
@@ -46,12 +48,13 @@ type CompilationData = {
 };
 
 export default function CodeEditor() {
-  const { code, setCode, bytecode, setCompiledBytecode } = useWorkflowStore();
+  const { code, setCode, bytecode, setCompiledBytecode, workflow } = useWorkflowStore();
   const workerRef = useRef<Worker | null>(null);
   const { toast } = useToast();
   const { address, isConnected } = useAccount();
   const publicClient = usePublicClient();
   const [deploying, setDeploying] = useState(false);
+  const ctx = api.useUtils();
   const isDisabledDeploy = (bytecode as CompilationData).errors != undefined || bytecode == "";
 
   useEffect(() => {
@@ -135,6 +138,46 @@ export default function CodeEditor() {
       await waitForTransactionReceipt(config, {
         hash: hash,
       });
+
+      // TODO: Жжу ног
+      // const triggerNode = workflow?.triggerNode;
+
+      // let tranferData = undefined;
+      // let swapData = undefined;
+      // let twitterCallData = undefined;
+
+      // if (triggerNode instanceof TwitterTriggerNode) {
+      //   const twitterNode = triggerNode as TwitterTriggerNode;
+      //   twitterCallData = {
+      //     twitterHandle: "",
+      //     searshWords: "",
+      //   };
+      // }
+
+      // if (triggerNode instanceof SwapNode) {
+      //   const twitterNode = triggerNode as SwapNode;
+      //   twitterCallData = {
+      //     twitterHandle: "",
+      //     searshWords: "",
+      //   };
+      // }
+
+      // if (triggerNode instanceof SwapNode) {
+      //   const twitterNode = triggerNode as SwapNode;
+      //   twitterCallData = {
+      //     twitterHandle: "",
+      //     searshWords: "",
+      //   };
+      // }
+
+      // ctx.client.workflow.create.mutate({
+      //   type: triggerNode?.type,
+      //   network: "ethereum",
+      //   contractAddress: `0x${hash}`,
+      //   transferData: tranferData,
+      //   swapData: swapData,
+      //   twitterCallData: undefined,
+      // });
 
       toast({
         title: "Contract deployed successfully!",

@@ -29,6 +29,8 @@ self.addEventListener(
     // Compile the Solidity code
     const output = JSON.parse(compiler.compile(JSON.stringify(sourceCode)));
 
+    console.log(output);
+
     // Post the result back to the main thread
     self.postMessage({ output });
   },
