@@ -6,7 +6,21 @@ import Header from "@/components/widgets/Header";
 import Modules from "@/components/widgets/Modules";
 import Workflow from "@/components/widgets/Workflow";
 
+import { useEffect, useState } from "react";
+import { baseNodes } from "@/components/editor2/lib";
+import type { Node } from "@xyflow/react";
+
 export default function Home() {
+  const [nodes, setNodes] = useState<Node[]>([
+    baseNodes.twitterPost,
+    baseNodes.swapTokens,
+    baseNodes.sendTokens,
+  ]);
+
+  // useEffect(() => {
+  //   setNodes([baseNodes.twitterPost, baseNodes.sendTokens);
+  // }, []);
+
   return (
     <main className={"flex flex-col gap-[1.042vw] px-[4.167vw] py-[2.604vw] w-screen h-screen"}>
       <Header />
@@ -15,7 +29,7 @@ export default function Home() {
 
         <ResizablePanelGroup direction={"horizontal"} className={"w-full h-full"}>
           <ResizablePanel>
-            <Workflow />
+            <Workflow nodes={nodes} setNodes={setNodes} />
           </ResizablePanel>
 
           <ResizableHandle withHandle className={"w-[1.042vw] h-full bg-[#F5F5F5]"} />

@@ -9,36 +9,28 @@ import {
   addEdge,
   applyEdgeChanges,
   applyNodeChanges,
+  type Node,
 } from "@xyflow/react";
-
 import "@xyflow/react/dist/style.css";
-import { TextUpdaterNode } from "./CustomNode";
+import { TwitterPostNode } from "@/components/editor2/nodes/TwitterPostNode";
+import { SendTokensNode } from "@/components/editor2/nodes/SendTokensNode";
+import { TokensType } from "@/lib/utils";
 
-const rfStyle = {
-  backgroundColor: "#B8CEFF",
+const nodeTypes = {
+  twitterPost: TwitterPostNode,
+  sendTokens: SendTokensNode,
+  // receiveTokens: ReceiveTokensNode,
+  // swapTokens: SwapTokensNode,
 };
 
-const initialNodes = [
-  {
-    id: "node-1",
-    type: "textUpdater",
-    position: { x: 0, y: 0 },
-    data: { value: "123", checkboxState: true }, // Added checkboxState
-  },
-  {
-    id: "node-2",
-    type: "textUpdater",
-    position: { x: 200, y: 0 },
-    data: { value: "456", checkboxState: false }, // Added checkboxState
-  },
-];
-
-const initialEdges = [{ id: "e1-2", source: "node-1", target: "node-2" }];
-
-const nodeTypes = { textUpdater: TextUpdaterNode };
-
-export default function Canvas() {
-  const [nodes, setNodes] = useState(initialNodes);
+export default function Canvas({
+  nodes,
+  setNodes,
+}: {
+  nodes: Node[];
+  setNodes: (nodes: Node[]) => void;
+}) {
+  // const [nodes, setNodes] = useState(initialNodes);
   const [edges, setEdges] = useState([]);
 
   const onNodesChange = useCallback(
@@ -55,7 +47,7 @@ export default function Canvas() {
   );
 
   return (
-    <div style={{ width: "100%", height: "100%", backgroundColor: "red" }}>
+    <div style={{ width: "100%", height: "100%" }}>
       <ReactFlow
         nodes={nodes}
         edges={edges}
@@ -63,10 +55,10 @@ export default function Canvas() {
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
         nodeTypes={nodeTypes}
+        defaultViewport={{ x: 50, y: 100, zoom: 1 }}
       >
         <Controls />
-        <MiniMap />
-        <Background variant="dots" gap={12} size={1} />
+        <Background variant="dots" gap={12} size={3} color={"#F5F5F5"} bgColor={"#FFFFFF"} />
       </ReactFlow>
     </div>
   );

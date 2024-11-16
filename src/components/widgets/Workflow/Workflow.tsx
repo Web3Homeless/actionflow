@@ -1,27 +1,35 @@
 import { CONTRACT_TEMPLATE } from "@/domain/const";
 import { useWorkflowStore } from "@/store/workflowStore";
-import { useRete } from "rete-react-plugin";
-import { createEditor } from "@/editor/editor";
 import Canvas from "@/components/editor2/Canvas";
+import type { Node } from "@xyflow/react";
 
-export default function Workflow() {
+export default function Workflow({
+  nodes,
+  setNodes,
+}: {
+  nodes: Node[];
+  setNodes: (nodes: Node[]) => void;
+}) {
   const { code, setCode } = useWorkflowStore();
-  //const [ref] = useRete(createEditor);
 
   return (
     <div className={"bg-white flex flex-col rounded-[0.521vw] w-full h-full overflow-hidden"}>
       <div
-        className={"flex flex-col w-full p-[0.781vw] h-full"}
-        style={{
-          backgroundColor: "white",
-          opacity: 1,
-          backgroundImage:
-            "radial-gradient(#F5F5F5 1.55px, transparent 1.55px), radial-gradient(#FFFFFF 1.55px, #FFFFFF 1.55px)",
-          backgroundSize: "24px 24px",
-          backgroundPosition: "0 0, 12px 12px",
-        }}
+        className={"flex relative flex-col w-full p-[0.781vw] h-full"}
+        // style={{
+        //   backgroundColor: "white",
+        //   opacity: 1,
+        //   backgroundImage:
+        //     "radial-gradient(#F5F5F5 1.55px, transparent 1.55px), radial-gradient(#FFFFFF 1.55px, #FFFFFF 1.55px)",
+        //   backgroundSize: "24px 24px",
+        //   backgroundPosition: "0 0, 12px 12px",
+        // }}
       >
-        <div className={"w-full flex flex-row justify-between items-center"}>
+        <div
+          className={
+            "w-full z-[1] p-[0.781vw] absolute left-0 top-0 flex flex-row justify-between items-center"
+          }
+        >
           <span className={"text-black text-[1.667vw] font-medium"}>Workflow Space</span>
           <button
             className={
@@ -61,7 +69,7 @@ export default function Workflow() {
           </button>
         </div>
         <div className={"overflow-y-scroll w-full h-full"}>
-          <Canvas></Canvas>
+          <Canvas nodes={nodes} setNodes={setNodes} />
         </div>
       </div>
     </div>
