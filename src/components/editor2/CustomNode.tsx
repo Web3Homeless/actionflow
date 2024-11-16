@@ -3,8 +3,8 @@ import { Handle, Position } from "@xyflow/react";
 
 const handleStyle = { left: 10 };
 
-export function TextUpdaterNode({ data }) {
-  const onChange = useCallback((evt) => {
+export function TextUpdaterNode({ data }: { data: any }) {
+  const onChange = useCallback((evt: any) => {
     console.log(evt.target.value);
   }, []);
 

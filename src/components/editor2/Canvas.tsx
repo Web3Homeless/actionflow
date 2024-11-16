@@ -1,15 +1,13 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useState } from "react";
 import {
-  ReactFlow,
-  MiniMap,
-  Controls,
-  Background,
-  useNodesState,
-  useEdgesState,
   addEdge,
   applyEdgeChanges,
   applyNodeChanges,
+  Background,
+  BackgroundVariant,
+  Controls,
   type Node,
+  ReactFlow,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 import { TwitterPostNodeTrigger } from "@/components/editor2/nodes/TwitterPostNodeTrigger";
@@ -40,15 +38,18 @@ export default function Canvas({
   const [edges, setEdges] = useState([]);
 
   const onNodesChange = useCallback(
-    (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
+    // @ts-ignore
+    (changes: any) => setNodes((nds) => applyNodeChanges(changes, nds)),
     [setNodes],
   );
   const onEdgesChange = useCallback(
-    (changes) => setEdges((eds) => applyEdgeChanges(changes, eds)),
+    (changes: any) => setEdges((eds) => applyEdgeChanges(changes, eds)),
     [setEdges],
   );
+
   const onConnect = useCallback(
-    (connection) => setEdges((eds) => addEdge(connection, eds)),
+    // @ts-ignore
+    (connection: any) => setEdges((eds) => addEdge(connection, eds)),
     [setEdges],
   );
 
@@ -64,7 +65,13 @@ export default function Canvas({
         defaultViewport={{ x: 50, y: 100, zoom: 1 }}
       >
         <Controls />
-        <Background variant="dots" gap={12} size={3} color={"#F5F5F5"} bgColor={"#FFFFFF"} />
+        <Background
+          variant={BackgroundVariant.Dots}
+          gap={12}
+          size={3}
+          color={"#F5F5F5"}
+          bgColor={"#FFFFFF"}
+        />
       </ReactFlow>
     </div>
   );

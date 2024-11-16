@@ -46,26 +46,26 @@ export default function Home() {
     let resultTriggerNode = undefined;
     let resultActionNode = undefined;
 
-    // if (triggerNode?.type == "receive") {
-    //   const data = triggerNode.data;
-    //   resultTriggerNode = new TransferTriggerNode({
-    //     token: "",
-    //   });
-    // }
-    // if (triggerNode?.type == "twitter") {
-    //   const data = triggerNode.data;
-    //   resultTriggerNode = new TwitterTriggerNode({
-    //     account: "",
-    //   });
-    // }
-    // if (actionNode?.type == "send") {
-    //   const data = actionNode.data;
-    //   resultActionNode = new SendNode({
-    //     account: "",
-    //     amount: "",
-    //     token: "",
-    //   });
-    // }
+    if (triggerNode?.type == "receive") {
+      const data = triggerNode.data;
+      resultTriggerNode = new TransferTriggerNode({
+        token: "",
+      });
+    }
+    if (triggerNode?.type == "twitter") {
+      const data = triggerNode.data;
+      resultTriggerNode = new TwitterTriggerNode({
+        account: "",
+      });
+    }
+    if (actionNode?.type == "send") {
+      const data = actionNode.data;
+      resultActionNode = new SendNode({
+        account: "",
+        amount: "",
+        token: "",
+      });
+    }
 
     if (!resultTriggerNode) return;
     if (!resultActionNode) return;

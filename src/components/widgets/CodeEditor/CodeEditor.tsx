@@ -56,6 +56,7 @@ export default function CodeEditor() {
   const publicClient = usePublicClient();
   const [deploying, setDeploying] = useState(false);
   const ctx = api.useUtils();
+  //@ts-ignore
   const isDisabledDeploy = (bytecode as CompilationData).errors != undefined || bytecode == "";
 
   useEffect(() => {
@@ -112,13 +113,15 @@ export default function CodeEditor() {
     }
 
     try {
+      //@ts-ignore
       const contract = bytecode.contracts[0];
 
-      console.log(contract);
-      console.log(bytecode);
-      console.log(bytecode.contracts.contract);
-      console.log(bytecode.contracts.contract.ActionFlowContract);
-      console.log(JSON.stringify(bytecode.contracts.contract.ActionFlowContract.abi));
+      // console.log(contract);
+      // console.log(bytecode);
+      // console.log(bytecode.contracts.contract);
+      // console.log(bytecode.contracts.contract.ActionFlowContract);
+      // console.log(JSON.stringify(bytecode.contracts.contract.ActionFlowContract.abi));
+      //@ts-ignore
       const c = bytecode.contracts.contract.ActionFlowContract;
 
       // Full bytecode (includes metadata and constructor)

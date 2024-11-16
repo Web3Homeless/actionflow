@@ -14,6 +14,7 @@ export function ReceiveTokensNodeAction() {
   const { addOrUpdateNode } = useWorkflowStore();
 
   useEffect(() => {
+    //@ts-ignore
     addOrUpdateNode(nodeId!, "tokens", {
       currentTokenType,
       amount,

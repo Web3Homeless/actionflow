@@ -1,4 +1,6 @@
+//@ts-ignore
 importScripts("https://binaries.soliditylang.org/bin/soljson-v0.8.19+commit.7dd6d404.js");
+//@ts-ignore
 import wrapper from "solc/wrapper";
 
 self.addEventListener(
@@ -23,6 +25,7 @@ self.addEventListener(
 
     console.log("Solc started!");
 
+    //@ts-ignore
     const compiler = wrapper(self.Module);
     console.log(`Solc version: ${compiler.version()}`);
 

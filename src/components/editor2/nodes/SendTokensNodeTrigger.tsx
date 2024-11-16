@@ -14,6 +14,7 @@ export function SendTokensNodeTrigger() {
   const { addOrUpdateNode } = useWorkflowStore();
 
   useEffect(() => {
+    //@ts-ignore
     addOrUpdateNode(nodeId!, "tokens", {
       currentTokenType,
       amount,
