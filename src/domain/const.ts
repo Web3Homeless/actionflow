@@ -4,27 +4,40 @@ const CONTRACT_STATE_DECLARATIONS = "{{CONTRACT_STATE_DECLARATIONS}}";
 const CONTRACT_FUNCTION_DECLARATIONS = "{{CONTRACT_FUNCTION_DECLARATIONS}}";
 const CONTRACT_ENTRYPOINT_CODE = "{{CONTRACT_ENTRYPOINT_CODE}}";
 
-const CONTRACT_TEMPLATE = `
+export const CONTRACT_TEMPLATE = `
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
 ${PRE_CONTRACT_DECLARATIONS}
 
 contract Actionflow {
-${CONTRACT_STATE_DECLARATIONS}
+  ${CONTRACT_STATE_DECLARATIONS}
 
-    // ПОДУМАТЬ ПРО КОНСТРУКТОР
-    constructor(address _vlayer, address _rewardToken, uint256 _rewardAmount) {
-        vlayer = IVLayer(_vlayer);
-        rewardToken = IToken(_rewardToken);
-        rewardAmount = _rewardAmount;
-    }
+  bool public isFrozen = false;
+  address public owner;
 
-    ${CONTRACT_ENTRYPOINT_SIGNATURE} {
-${CONTRACT_ENTRYPOINT_CODE}
-    }
+  modifier onlyOwner() {
+    require(msg.sender == owner, "Not the contract owner");
+    _;
+  }
 
-${CONTRACT_FUNCTION_DECLARATIONS} 
+  modifier whenNotFrozen() {
+    require(!isFrozen, "Contract is currently frozen");
+    _;
+  }
+
+  // ПОДУМАТЬ ПРО КОНСТРУКТОР
+  constructor(address _vlayer, address _rewardToken, uint256 _rewardAmount) {
+    vlayer = IVLayer(_vlayer);
+    rewardToken = IToken(_rewardToken);
+    rewardAmount = _rewardAmount;
+  }
+
+  ${CONTRACT_ENTRYPOINT_SIGNATURE} {
+    ${CONTRACT_ENTRYPOINT_CODE}
+  }
+
+  ${CONTRACT_FUNCTION_DECLARATIONS} 
 }
 `;
 

@@ -1,4 +1,9 @@
+import { CONTRACT_TEMPLATE } from "@/domain/const";
+import { useWorkflowStore } from "@/store/workflowStore";
+
 export default function Workflow() {
+  const { code, setCode } = useWorkflowStore();
+
   return (
     <div className={"bg-white flex flex-col rounded-[0.521vw] w-full h-full overflow-hidden"}>
       <div
@@ -18,6 +23,12 @@ export default function Workflow() {
             className={
               "flex hover:opacity-80 flex-row bg-gradient-to-r from-[#FF603A] to-[#F3B440] justify-center items-center py-[0.781vw] px-[1.25vw] rounded-full gap-[0.521vw]"
             }
+            onClick={(e) => {
+                // TODO: ВЫЗЫВАТЬ
+                // generateCode из Domain с передачей
+                // Корневого ITrigger узла
+                setCode(CONTRACT_TEMPLATE);
+            }}
           >
             <svg
               width="22"
