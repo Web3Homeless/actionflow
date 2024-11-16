@@ -1,17 +1,24 @@
 import type { ReactNode } from "react";
-import { cn } from "@/lib/utils";
+import { cn, TokensType } from "@/lib/utils";
+import type { Node } from "@xyflow/react";
+import { baseNodes } from "@/components/editor2/lib";
 
 const ModuleBtn = ({
+  id,
   name,
   type,
+  onClick,
   icon,
 }: {
+  id: "twitterPost" | "sendTokens" | "receiveTokens" | "swapTokens" | "bridgeUSDC";
   name: string;
   type: "action" | "trigger";
+  onClick: () => void;
   icon: ReactNode;
 }) => {
   return (
     <button
+      onClick={onClick}
       className={cn(
         "flex hover:opacity-80 flex-row gap-[0.521vw] items-center justify-center px-[0.781vw] py-[0.521vw] rounded-[0.521vw]",
         type === "action" ? "bg-violet" : type === "trigger" ? "bg-yellow" : "bg-red",
@@ -24,11 +31,13 @@ const ModuleBtn = ({
 };
 
 const actions: {
+  id: "twitterPost" | "sendTokens" | "receiveTokens" | "swapTokens" | "bridgeUSDC";
   name: string;
   type: "action" | "trigger";
   icon: ReactNode;
 }[] = [
   {
+    id: "swapTokens",
     name: "Swap Token",
     type: "action",
     icon: (
@@ -79,6 +88,7 @@ const actions: {
     ),
   },
   {
+    id: "sendTokens",
     name: "Send Tokens",
     type: "action",
     icon: (
@@ -108,6 +118,7 @@ const actions: {
     ),
   },
   {
+    id: "bridgeUSDC",
     name: "Bridge USDC",
     type: "action",
     icon: (
@@ -131,11 +142,13 @@ const actions: {
 ];
 
 const triggers: {
+  id: "twitterPost" | "sendTokens" | "receiveTokens" | "swapTokens" | "bridgeUSDC";
   name: string;
   type: "action" | "trigger";
   icon: ReactNode;
 }[] = [
   {
+    id: "twitterPost",
     name: "Twitter Post",
     type: "trigger",
     icon: (
@@ -169,7 +182,67 @@ const triggers: {
   },
 ];
 
-export default function Modules() {
+export default function Modules({
+  nodes,
+  setNodes,
+}: {
+  nodes: Node[];
+  setNodes: (nodes: Node[]) => void;
+}) {
+  const updateNodes = (
+    id: "twitterPost" | "sendTokens" | "receiveTokens" | "swapTokens" | "bridgeUSDC",
+  ) => {
+    switch (id) {
+      case "twitterPost":
+        setNodes([
+          ...nodes,
+          {
+            id: `twitterPost-${Math.floor(Math.random() * 10000)}`,
+            type: "twitterPost",
+            position: { x: 0, y: 0 },
+            data: { handle: "", keywords: "" },
+          },
+        ]);
+        break;
+      case "sendTokens":
+        setNodes([
+          ...nodes,
+          {
+            id: `sendTokens-${Math.floor(Math.random() * 10000)}`,
+            type: "sendTokens",
+            position: { x: 100, y: 0 },
+            data: { type: TokensType.ETH, walletAddress: "", amount: 0 },
+          },
+        ]);
+        break;
+      case "receiveTokens":
+        setNodes([
+          ...nodes,
+          {
+            id: `receiveTokens-${Math.floor(Math.random() * 10000)}`,
+            type: "receiveTokens",
+            position: { x: 200, y: 0 },
+            data: { type: TokensType.ETH, walletAddress: "", amount: 0 },
+          },
+        ]);
+        break;
+      case "swapTokens":
+        setNodes([
+          ...nodes,
+          {
+            id: `swapToken-${Math.floor(Math.random() * 10000)}`,
+            type: "swapTokens",
+            position: { x: 300, y: 0 },
+            data: { fromType: TokensType.ETH, toType: TokensType.USDT, amount: 0 },
+          },
+        ]);
+        break;
+
+      default:
+        break;
+    }
+  };
+
   return (
     <div
       className={
@@ -219,7 +292,16 @@ export default function Modules() {
       </span>
       <div className={"grid grid-cols-2 gap-[0.521vw] mb-[1.563vw]"}>
         {actions.map((item, index) => (
-          <ModuleBtn key={index} name={item.name} type={item.type} icon={item.icon} />
+          <ModuleBtn
+            id={item.id}
+            key={index}
+            name={item.name}
+            type={item.type}
+            icon={item.icon}
+            onClick={() => {
+              updateNodes(item.id);
+            }}
+          />
         ))}
       </div>
       <span className={"text-black text-[1.042vw] font-medium font-lufga mb-[0.781vw]"}>
@@ -227,7 +309,16 @@ export default function Modules() {
       </span>
       <div className={"grid grid-cols-2 gap-[0.521vw]"}>
         {triggers.map((item, index) => (
-          <ModuleBtn key={index} name={item.name} type={item.type} icon={item.icon} />
+          <ModuleBtn
+            id={item.id}
+            key={index}
+            name={item.name}
+            type={item.type}
+            icon={item.icon}
+            onClick={() => {
+              updateNodes(item.id);
+            }}
+          />
         ))}
       </div>
     </div>

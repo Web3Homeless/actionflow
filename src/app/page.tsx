@@ -21,7 +21,7 @@ export default function Home() {
     <main className={"flex flex-col gap-[1.042vw] px-[4.167vw] py-[2.604vw] w-screen h-screen"}>
       <Header />
       <div className={"flex flex-row gap-[1.042vw] w-full h-full"}>
-        <Modules />
+        <Modules nodes={nodes} setNodes={setNodes} />
 
         <ResizablePanelGroup direction={"horizontal"} className={"w-full h-full"}>
           <ResizablePanel>
