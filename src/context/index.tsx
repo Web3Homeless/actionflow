@@ -2,7 +2,7 @@
 
 import { wagmiAdapter, projectId } from "@/config";
 import { createAppKit } from "@reown/appkit/react";
-import { mainnet, arbitrum } from "@reown/appkit/networks";
+import { mainnet, arbitrum, arbitrumSepolia, sepolia, polygonZkEvm } from "@reown/appkit/networks";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import React, { type ReactNode } from "react";
@@ -28,7 +28,7 @@ const metadata = {
 export const modal = createAppKit({
   adapters: [wagmiAdapter],
   projectId,
-  networks: [mainnet, arbitrum],
+  networks: [arbitrumSepolia, sepolia, polygonZkEvm],
   metadata: metadata,
   features: {
     analytics: true, // Optional - defaults to your Cloud configuration
