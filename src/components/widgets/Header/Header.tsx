@@ -32,7 +32,7 @@ export default function Header() {
       <div className={"w-[38%] text-red font-lufga text-[1.823vw] font-semibold text-left"}>
         ActionFlow
       </div>
-      <div className={"w-full flex flex-row items-center justify-center"}>
+      <div className={"w-full gap-[2.083vw] flex flex-row items-center justify-center"}>
         <DropdownMenu open={leftOpen} onOpenChange={setLeftOpen}>
           <DropdownMenuTrigger asChild>
             <button
@@ -40,7 +40,7 @@ export default function Header() {
                 "border border-red font-lufga rounded-full text-red flex flex-row gap-[0.521vw] items-center px-[1.042vw] py-[0.521vw]"
               }
             >
-              <span className={"text-[1.042vw] font-medium"}>Contract:</span>
+              <span className={"text-[1.042vw] font-medium"}>Flow:</span>
               <span className={"text-[1.042vw]"}>{dropdownItem}</span>
               <motion.svg
                 width="22"
@@ -65,12 +65,42 @@ export default function Header() {
             <DropdownMenuLabel>Panel Position</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuRadioGroup value={dropdownPosition} onValueChange={setDropdownPosition}>
-              <DropdownMenuRadioItem value="top">Top</DropdownMenuRadioItem>
-              <DropdownMenuRadioItem value="bottom">Bottom</DropdownMenuRadioItem>
-              <DropdownMenuRadioItem value="right">Right</DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="top">1inch Swap</DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="bottom">ETH Token Transfer</DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="right">USDC Brige</DropdownMenuRadioItem>
             </DropdownMenuRadioGroup>
           </DropdownMenuContent>
         </DropdownMenu>
+        <button
+          className={
+            "border border-red font-lufga rounded-full text-red flex flex-row gap-[0.521vw] items-center px-[1.042vw] py-[0.521vw]"
+          }
+        >
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 22 22"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className={"w-[1.146vw]"}
+          >
+            <path
+              d="M1 11H21"
+              stroke="#FF603A"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M11 1V21"
+              stroke="#FF603A"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          <span className={"text-[1.042vw] font-medium"}>Create New Contract</span>
+        </button>
       </div>
       <div
         className={

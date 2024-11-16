@@ -31,7 +31,33 @@ export default function Home() {
           <ResizableHandle withHandle className={"w-[1.042vw] h-full bg-[#F5F5F5]"} />
 
           <ResizablePanel defaultSize={28} className={"h-full flex flex-col gap-[1.042vw]"}>
-            <div className={"bg-white rounded-[0.521vw] h-[10%] w-full"}></div>
+            <div
+              className={
+                "bg-white rounded-[0.521vw] h-[10%] w-full flex flex-row justify-center items-center gap-[]"
+              }
+            >
+              <div
+                className={
+                  "flex flex-col justify-center rounded-[0.26vw] bg-red items-center py-[0.521vw] px-[0.781vw]"
+                }
+              >
+                <span className={"text-white text-[0.938vw] font-medium"}>Code</span>
+              </div>
+              <div
+                className={
+                  "flex rounded-[0.26vw] flex-col justify-center items-center py-[0.521vw] px-[0.781vw]"
+                }
+              >
+                <span className={"text-red text-[0.938vw] font-medium"}>Actions</span>
+              </div>
+              <div
+                className={
+                  "flex rounded-[0.26vw] flex-col justify-center items-center py-[0.521vw] px-[0.781vw]"
+                }
+              >
+                <span className={"text-red text-[0.938vw] font-medium"}>My Flows</span>
+              </div>
+            </div>
             <div className={"bg-white rounded-[0.521vw] h-[90%] w-full"}>
               <CodeEditor />
             </div>

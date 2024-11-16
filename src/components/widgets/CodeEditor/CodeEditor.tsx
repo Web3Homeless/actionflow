@@ -195,6 +195,13 @@ export default function CodeEditor() {
 
   return (
     <div className="w-full h-full flex flex-col justify-center items-center">
+      <span
+        className={
+          "text-black px-[0.781vw] font-medium text-[1.667vw] text-left mr-auto my-[0.521vw]"
+        }
+      >
+        Generated code
+      </span>
       <div className="w-full h-full overflow-y-scroll">
         <CodeMirror
           width="100%"
