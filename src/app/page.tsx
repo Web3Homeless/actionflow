@@ -9,6 +9,14 @@ import Workflow from "@/components/widgets/Workflow";
 import { useState } from "react";
 import { baseNodes } from "@/components/editor2/lib";
 import type { Node } from "@xyflow/react";
+import { useWorkflowStore } from "@/store/workflowStore";
+import { CONTRACT_TEMPLATE } from "@/domain/const";
+import { INode } from "@/domain/interfaces";
+import { TransferTriggerNode } from "@/domain/nodes/transfer-trigger-node";
+import { SendTokensNodeAction } from "@/components/editor2/nodes/SendTokensNodeAction";
+import { SendNode } from "@/domain/nodes/send-action-node";
+import { TwitterTriggerNode } from "@/domain/nodes/twitter-trigger-node";
+import { generateCode } from "@/domain/codegen";
 
 export default function Home() {
   const [nodes, setNodes] = useState<Node[]>([
@@ -16,6 +24,55 @@ export default function Home() {
     baseNodes.receiveTokens,
     baseNodes.sendTokens,
   ]);
+
+  const { nodes: n, setCode } = useWorkflowStore();
+
+  const handleClick = () => {
+    console.log("GET NODE LIST");
+    console.log(n);
+    console.log(nodes);
+    const intersectingNodes = n.filter((node) =>
+      nodes.some((storeNode) => storeNode.id === node.id),
+    );
+    console.log("intersecting");
+    console.log(intersectingNodes);
+
+    const triggerNode = intersectingNodes.find((node) => node.category === "trigger");
+    const actionNode = intersectingNodes.find((node) => node.category === "action");
+
+    console.log("Trigger Node:", triggerNode);
+    console.log("Action Node:", actionNode);
+
+    let resultTriggerNode = undefined;
+    let resultActionNode = undefined;
+
+    // if (triggerNode?.type == "receive") {
+    //   const data = triggerNode.data;
+    //   resultTriggerNode = new TransferTriggerNode({
+    //     token: "",
+    //   });
+    // }
+    // if (triggerNode?.type == "twitter") {
+    //   const data = triggerNode.data;
+    //   resultTriggerNode = new TwitterTriggerNode({
+    //     account: "",
+    //   });
+    // }
+    // if (actionNode?.type == "send") {
+    //   const data = actionNode.data;
+    //   resultActionNode = new SendNode({
+    //     account: "",
+    //     amount: "",
+    //     token: "",
+    //   });
+    // }
+
+    if (!resultTriggerNode) return;
+    if (!resultActionNode) return;
+    resultTriggerNode.nextNode = resultActionNode;
+    // const resultCode = generateCode(resultTriggerNode!);
+    // setCode(resultCode);
+  };
 
   return (
     <main className={"flex flex-col gap-[1.042vw] px-[4.167vw] py-[2.604vw] w-screen h-screen"}>
@@ -25,7 +82,7 @@ export default function Home() {
 
         <ResizablePanelGroup direction={"horizontal"} className={"w-full h-full"}>
           <ResizablePanel>
-            <Workflow nodes={nodes} setNodes={setNodes} />
+            <Workflow onCompileClick={handleClick} nodes={nodes} setNodes={setNodes} />
           </ResizablePanel>
 
           <ResizableHandle withHandle className={"w-[1.042vw] h-full bg-[#F5F5F5]"} />
@@ -59,7 +116,7 @@ export default function Home() {
               </div>
             </div>
             <div className={"bg-white rounded-[0.521vw] h-[90%] w-full"}>
-              <CodeEditor />
+              <CodeEditor></CodeEditor>
             </div>
           </ResizablePanel>
         </ResizablePanelGroup>

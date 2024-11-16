@@ -17,6 +17,7 @@ import { SendTokensNodeAction } from "@/components/editor2/nodes/SendTokensNodeA
 import { ReceiveTokensNodeAction } from "@/components/editor2/nodes/ReceiveTokensNodeAction";
 import { SendTokensNodeTrigger } from "@/components/editor2/nodes/SendTokensNodeTrigger";
 import { ReceiveTokensNodeTrigger } from "@/components/editor2/nodes/ReceiveTokensNodeTrigger";
+import { INode } from "@/domain/interfaces";
 
 const nodeTypes = {
   twitterPostTrigger: TwitterPostNodeTrigger,
@@ -30,9 +31,11 @@ const nodeTypes = {
 export default function Canvas({
   nodes,
   setNodes,
+  setDomainNodes,
 }: {
   nodes: Node[];
   setNodes: (nodes: Node[]) => void;
+  setDomainNodes: (nodes: INode[]) => void;
 }) {
   const [edges, setEdges] = useState([]);
 

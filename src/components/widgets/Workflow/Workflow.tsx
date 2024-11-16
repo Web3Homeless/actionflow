@@ -6,12 +6,12 @@ import type { Node } from "@xyflow/react";
 export default function Workflow({
   nodes,
   setNodes,
+  onCompileClick,
 }: {
   nodes: Node[];
   setNodes: (nodes: Node[]) => void;
+  onCompileClick: () => void;
 }) {
-  const { code, setCode } = useWorkflowStore();
-
   return (
     <div className={"bg-white flex flex-col rounded-[0.521vw] w-full h-full overflow-hidden"}>
       <div className={"flex relative flex-col w-full p-[0.781vw] h-full"}>
@@ -26,10 +26,7 @@ export default function Workflow({
               "flex hover:opacity-80 flex-row bg-gradient-to-r from-[#FF603A] to-[#F3B440] justify-center items-center py-[0.781vw] px-[1.25vw] rounded-full gap-[0.521vw]"
             }
             onClick={(e) => {
-              // TODO: ВЫЗЫВАТЬ
-              // generateCode из Domain с передачей
-              // Корневого ITrigger узла
-              setCode(CONTRACT_TEMPLATE);
+              onCompileClick();
             }}
           >
             <svg

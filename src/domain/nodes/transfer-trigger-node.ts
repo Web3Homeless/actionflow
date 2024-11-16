@@ -2,7 +2,6 @@ import { toChecksumAddress } from "../format";
 import { type ITriggerNode, type INode, type NodeType } from "../interfaces";
 
 export type TransferTriggerNodeParams = {
-  account: string;
   token: string;
 };
 

@@ -1,12 +1,30 @@
-import { Handle, Position } from "@xyflow/react";
+import { Handle, Position, useNodeId } from "@xyflow/react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/Select";
 import { TokensType } from "@/lib/utils";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useWorkflowStore } from "@/store/workflowStore";
 
 export function ReceiveTokensNodeTrigger() {
+  const nodeId = useNodeId();
+
   const [currentTokenType, setCurrentTokenType] = useState<string>();
   const [amount, setAmount] = useState<number>();
   const [userAddress, setUserAddress] = useState<string>("");
+
+  const { addOrUpdateNode } = useWorkflowStore();
+
+  useEffect(() => {
+    addOrUpdateNode(
+      nodeId!,
+      "recieve",
+      {
+        currentTokenType,
+        amount,
+        userAddress,
+      },
+      "trigger",
+    );
+  }, [nodeId, currentTokenType, amount, userAddress, addOrUpdateNode]);
 
   return (
     <div className={"rounded-[0.521vw] relative p-[0.781vw] flex flex-col bg-yellow"}>

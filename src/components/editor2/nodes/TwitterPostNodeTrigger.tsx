@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { Handle, Position } from "@xyflow/react";
+import { useEffect, useState } from "react";
+import { Handle, Position, useNodeId } from "@xyflow/react";
+import { useWorkflowStore } from "@/store/workflowStore";
 
 // {
 //     data,
@@ -8,8 +9,24 @@ import { Handle, Position } from "@xyflow/react";
 // }
 
 export function TwitterPostNodeTrigger() {
+  const nodeId = useNodeId();
+
   const [twitterHandle, setTwitterHandle] = useState<string>("");
   const [twitterKeywords, setTwitterKeywords] = useState<string>("");
+
+  const { addOrUpdateNode } = useWorkflowStore();
+
+  useEffect(() => {
+    addOrUpdateNode(
+      nodeId!,
+      "twitter",
+      {
+        twitterHandle,
+        twitterKeywords,
+      },
+      "trigger",
+    );
+  }, [nodeId, twitterHandle, twitterKeywords, addOrUpdateNode]);
 
   return (
     <div className={"rounded-[0.521vw] relative p-[0.781vw] flex flex-col bg-yellow"}>
