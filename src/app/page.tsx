@@ -1,6 +1,7 @@
 "use client";
 
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/Resizable";
+import GeneratedCode from "@/components/widgets/Code/GeneratedCode";
 import Header from "@/components/widgets/Header";
 import Modules from "@/components/widgets/Modules";
 import Workflow from "@/components/widgets/Workflow";
@@ -14,7 +15,9 @@ export default function Home() {
         <Workflow />
         <div className={"w-[38%] h-full flex flex-col gap-[1.042vw]"}>
           <div className={"bg-white rounded-[0.521vw] h-[10%] w-full"}></div>
-          <div className={"bg-white rounded-[0.521vw] h-full w-full"}></div>
+          <div className={"bg-white rounded-[0.521vw] h-full w-full"}>
+            <GeneratedCode></GeneratedCode>
+          </div>
         </div>
       </div>
     </main>
