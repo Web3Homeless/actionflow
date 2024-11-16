@@ -2,12 +2,13 @@ import React, { useEffect } from "react";
 import CodeMirror from "@uiw/react-codemirror";
 import { solidity } from "@replit/codemirror-lang-solidity";
 import { useWorkflowStore } from "@/store/workflowStore";
+import { Button } from "@/components/ui/button";
 
 type Props = {};
 
 const extensions = [solidity];
 
-export default function GeneratedCode({}: Props) {
+export default function CodeEditor({}: Props) {
   const { code, setCode } = useWorkflowStore();
 
   return (
@@ -19,6 +20,7 @@ export default function GeneratedCode({}: Props) {
         extensions={extensions}
         onChange={(value) => setCode(value)}
       />
+      <Button>Deploy Contract</Button>
     </div>
   );
 }
