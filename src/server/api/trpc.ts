@@ -10,8 +10,6 @@ import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
 
-import { auth } from "~/server/auth";
-
 /**
  * 1. CONTEXT
  *
@@ -25,10 +23,8 @@ import { auth } from "~/server/auth";
  * @see https://trpc.io/docs/server/context
  */
 export const createTRPCContext = async (opts: { headers: Headers }) => {
-  const session = await auth();
 
   return {
-    session,
     ...opts,
   };
 };
@@ -115,6 +111,9 @@ export const publicProcedure = t.procedure.use(timingMiddleware);
  *
  * @see https://trpc.io/docs/procedures
  */
+
+
+/*
 export const protectedProcedure = t.procedure
   .use(timingMiddleware)
   .use(({ ctx, next }) => {
@@ -128,3 +127,4 @@ export const protectedProcedure = t.procedure
       },
     });
   });
+*/
