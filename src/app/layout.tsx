@@ -1,8 +1,10 @@
 import "@/app/globals.css";
 import { lufga } from "./fonts";
 import { type Metadata } from "next";
+import { headers } from "next/headers"; // added
 
 import { TRPCReactProvider } from "@/trpc/react";
+import ContextProvider from '@/context'
 
 export const metadata: Metadata = {
   title: "Create T3 App",
@@ -10,11 +12,21 @@ export const metadata: Metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default async function RootLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
+  
+  const headersList = await headers();
+  const cookies = headersList.get("cookie");
+
   return (
     <html lang="en" className={`${lufga.variable}`}>
       <body>
-        <TRPCReactProvider>{children}</TRPCReactProvider>
+        <TRPCReactProvider>
+          <ContextProvider cookies={cookies}>
+            {children}
+          </ContextProvider>
+        </TRPCReactProvider>
       </body>
     </html>
   );
