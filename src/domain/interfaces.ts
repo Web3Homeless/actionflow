@@ -15,5 +15,5 @@ export interface IOnchainActionNode extends INode {
 }
 
 export interface ITriggerNode extends IOnchainActionNode {
-  getContractEntrypoint(): string;
+  getContractEntrypointSignature(): string;
 }

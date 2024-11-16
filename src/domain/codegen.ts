@@ -1,11 +1,13 @@
 import { getFinalContractCode } from "./const";
+import { indentTo } from "./format";
 import { type ITriggerNode, type INode, type IOnchainActionNode } from "./interfaces";
 
 export function generateCode(triggerNode: ITriggerNode): string {
   let preContractDeclarations = "";
   let contractStateDeclarations = "";
-  let contractEntrypoint = "";
+  let contractEntrypointSignature = "";
   let contractFunctionDeclarations = "";
+  let contractEntrypointCode = "";
 
   function processNode(node: INode | null) {
     if (!node) return;
@@ -14,20 +16,21 @@ export function generateCode(triggerNode: ITriggerNode): string {
       case "trigger":
         const trigger = node as ITriggerNode;
 
-        contractEntrypoint += trigger.getContractEntrypoint() + "\n";
-        preContractDeclarations += trigger.getContractPreDeclarations() + "\n";
-        contractStateDeclarations += trigger.getContractStateParams() + "\n";
-        contractFunctionDeclarations += trigger.getContractFunctionCall() + "\n";
-        contractFunctionDeclarations += trigger.getContractFunctionDeclaration() + "\n";
+        contractEntrypointSignature += indentTo(trigger.getContractEntrypointSignature(), 4);
+
+        preContractDeclarations += indentTo(trigger.getContractPreDeclarations(), 0);
+        contractStateDeclarations += indentTo(trigger.getContractStateParams(), 4);
+        contractEntrypointCode += indentTo(trigger.getContractFunctionCall(), 6);
+        contractFunctionDeclarations += indentTo(trigger.getContractFunctionDeclaration(), 4);
         break;
 
       case "onchain_action":
         const onchainNode = node as IOnchainActionNode;
 
-        contractStateDeclarations += onchainNode.getContractStateParams() + "\n";
-        contractFunctionDeclarations += onchainNode.getContractFunctionCall() + "\n";
-        contractFunctionDeclarations += onchainNode.getContractFunctionDeclaration() + "\n";
-        preContractDeclarations += onchainNode.getContractPreDeclarations() + "\n";
+        preContractDeclarations += indentTo(onchainNode.getContractPreDeclarations(), 0);
+        contractStateDeclarations += indentTo(onchainNode.getContractStateParams(), 4);
+        contractEntrypointCode += indentTo(onchainNode.getContractFunctionCall(), 6);
+        contractFunctionDeclarations += indentTo(onchainNode.getContractFunctionDeclaration(), 4);
         break;
     }
 
@@ -39,7 +42,8 @@ export function generateCode(triggerNode: ITriggerNode): string {
   return getFinalContractCode({
     preContractDeclarations,
     contractStateDeclarations,
-    contractEntrypoint,
+    contractEntrypointSignature,
     contractFunctionDeclarations,
+    contractEntrypointCode,
   });
 }
