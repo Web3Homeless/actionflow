@@ -1,8 +1,11 @@
 import { CONTRACT_TEMPLATE } from "@/domain/const";
 import { useWorkflowStore } from "@/store/workflowStore";
+import { useRete } from "rete-react-plugin";
+import { createEditor } from "@/editor/editor";
 
 export default function Workflow() {
   const { code, setCode } = useWorkflowStore();
+  const [ref] = useRete(createEditor);
 
   return (
     <div className={"bg-white flex flex-col rounded-[0.521vw] w-full h-full overflow-hidden"}>
@@ -24,10 +27,10 @@ export default function Workflow() {
               "flex hover:opacity-80 flex-row bg-gradient-to-r from-[#FF603A] to-[#F3B440] justify-center items-center py-[0.781vw] px-[1.25vw] rounded-full gap-[0.521vw]"
             }
             onClick={(e) => {
-                // TODO: ВЫЗЫВАТЬ
-                // generateCode из Domain с передачей
-                // Корневого ITrigger узла
-                setCode(CONTRACT_TEMPLATE);
+              // TODO: ВЫЗЫВАТЬ
+              // generateCode из Domain с передачей
+              // Корневого ITrigger узла
+              setCode(CONTRACT_TEMPLATE);
             }}
           >
             <svg
@@ -57,7 +60,7 @@ export default function Workflow() {
           </button>
         </div>
         <div className={"overflow-y-scroll w-full h-full"}>
-          <div className={"w-full h-full"} />
+          <div ref={ref} className={"w-full h-full"} />
         </div>
       </div>
     </div>
