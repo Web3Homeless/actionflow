@@ -17,10 +17,6 @@ export default function Home() {
     baseNodes.sendTokens,
   ]);
 
-  // useEffect(() => {
-  //   setNodes([baseNodes.twitterPost, baseNodes.sendTokens);
-  // }, []);
-
   return (
     <main className={"flex flex-col gap-[1.042vw] px-[4.167vw] py-[2.604vw] w-screen h-screen"}>
       <Header />

@@ -30,7 +30,6 @@ export default function Canvas({
   nodes: Node[];
   setNodes: (nodes: Node[]) => void;
 }) {
-  // const [nodes, setNodes] = useState(initialNodes);
   const [edges, setEdges] = useState([]);
 
   const onNodesChange = useCallback(

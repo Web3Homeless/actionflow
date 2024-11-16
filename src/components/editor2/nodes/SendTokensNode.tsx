@@ -1,8 +1,13 @@
 import { Handle, Position } from "@xyflow/react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/Select";
 import { TokensType } from "@/lib/utils";
+import { useState } from "react";
 
 export function SendTokensNode() {
+  const [currentTokenType, setCurrentTokenType] = useState<string>();
+  const [amount, setAmount] = useState<number>();
+  const [userAddress, setUserAddress] = useState<string>("");
+
   return (
     <div className={"rounded-[0.521vw] relative p-[0.781vw] flex flex-col bg-violet"}>
       <div className={"flex mb-[0.625vw] flex-row items-center gap-[0.521vw]"}>
@@ -32,7 +37,7 @@ export function SendTokensNode() {
         <span className={"text-white text-[1.042vw] font-medium"}>Send Tokens</span>
       </div>
       <div className={"flex flex-col gap-[0.26vw]"}>
-        <Select>
+        <Select onValueChange={(value) => setCurrentTokenType(value)}>
           <SelectTrigger className="w-full">
             <SelectValue placeholder="Select token" />
           </SelectTrigger>
@@ -52,7 +57,7 @@ export function SendTokensNode() {
                   "w-full rounded-full py-[0.365vw] px-[0.573vw] bg-white text-black text-[0.625vw]"
                 }
               >
-                {TokensType.ETH}
+                {TokensType.USDC}
               </span>
             </SelectItem>
             <SelectItem value={TokensType.USDT}>
@@ -61,38 +66,35 @@ export function SendTokensNode() {
                   "w-full rounded-full py-[0.365vw] px-[0.573vw] bg-white text-black text-[0.625vw]"
                 }
               >
-                {TokensType.ETH}
+                {TokensType.USDT}
               </span>
             </SelectItem>
-            {/*<SelectItemComponent value={TokensType.ETH} />*/}
-            {/*<SelectItemComponent value={TokensType.USDC} />*/}
-            {/*<SelectItemComponent value={TokensType.USDT} />*/}
           </SelectContent>
         </Select>
-        {/*<div*/}
-        {/*  className={*/}
-        {/*    "w-full rounded-full py-[0.365vw] px-[0.573vw] bg-white text-black placeholder:text-[#DDDDDD] text-[0.625vw] placeholder:text-[0.625vw]"*/}
-        {/*  }*/}
-        {/*>*/}
-        {/*  <input*/}
-        {/*    className={"w-full outline-0"}*/}
-        {/*    placeholder={"Handle..."}*/}
-        {/*    value={twitterHandle}*/}
-        {/*    onChange={(e) => setTwitterHandle(e.target.value)}*/}
-        {/*  />*/}
-        {/*</div>*/}
-        {/*<div*/}
-        {/*  className={*/}
-        {/*    "w-full rounded-full py-[0.365vw] px-[0.573vw] bg-white text-black placeholder:text-[#DDDDDD] text-[0.625vw] placeholder:text-[0.625vw]"*/}
-        {/*  }*/}
-        {/*>*/}
-        {/*  <input*/}
-        {/*    className={"w-full outline-0"}*/}
-        {/*    placeholder={"Keywords..."}*/}
-        {/*    value={twitterKeywords}*/}
-        {/*    onChange={(e) => setTwitterKeywords(e.target.value)}*/}
-        {/*  />*/}
-        {/*</div>*/}
+        <div
+          className={
+            "w-full rounded-full py-[0.365vw] px-[0.573vw] bg-white text-black placeholder:text-[#DDDDDD] text-[0.625vw] placeholder:text-[0.625vw]"
+          }
+        >
+          <input
+            className={"w-full outline-0"}
+            placeholder={"Amount..."}
+            value={amount}
+            onChange={(e) => setAmount(Number(e.target.value))}
+          />
+        </div>
+        <div
+          className={
+            "w-full rounded-full py-[0.365vw] px-[0.573vw] bg-white text-black placeholder:text-[#DDDDDD] text-[0.625vw] placeholder:text-[0.625vw]"
+          }
+        >
+          <input
+            className={"w-full outline-0"}
+            placeholder={"Wallet address..."}
+            value={userAddress}
+            onChange={(e) => setUserAddress(e.target.value)}
+          />
+        </div>
       </div>
       <Handle type={"target"} position={Position.Left} />
     </div>
