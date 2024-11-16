@@ -173,7 +173,7 @@ export default function Modules() {
   return (
     <div
       className={
-        "py-[0.781vw] px-[1.042vw] flex flex-col bg-white rounded-[0.521vw] w-[35%] h-full"
+        "py-[0.781vw] px-[1.042vw] flex flex-col bg-white rounded-[0.521vw] w-[38%] h-full"
       }
     >
       <span className={"font-lufga mb-[0.781vw] font-medium text-[1.667vw] text-black"}>

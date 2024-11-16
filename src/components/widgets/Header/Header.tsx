@@ -29,7 +29,7 @@ export default function Header() {
         "w-full flex flex-row items-center bg-white rounded-[0.521vw] py-[1.406vw] px-[1.042vw]"
       }
     >
-      <div className={"w-[30%] text-red font-lufga text-[1.823vw] font-semibold text-left"}>
+      <div className={"w-[38%] text-red font-lufga text-[1.823vw] font-semibold text-left"}>
         ActionFlow
       </div>
       <div className={"w-full flex flex-row items-center justify-center"}>
@@ -74,12 +74,12 @@ export default function Header() {
       </div>
       <div
         className={
-          "w-[30%] gap-[0.781vw] flex flex-row items-center justify-center border-l border-[#DDDDDD]"
+          "w-[36%] gap-[0.781vw] flex flex-row items-center justify-center border-l border-[#DDDDDD]"
         }
       >
         <div
           className={
-            "flex flex-col justify-center items-center border bg-red/30 border-red p-[0.313vw] rounded-full"
+            "flex w-[2.604vw] h-[2.604vw] flex-col justify-center items-center border bg-red/30 border-red p-[0.313vw] rounded-full"
           }
         >
           <Image
@@ -91,7 +91,7 @@ export default function Header() {
         <button
           onClick={() => modal.open()}
           className={
-            "border hover:opacity-80 bg-red/30 border-red py-[0.625vw] px-[2.031vw] rounded-full flex items-center justify-center"
+            "border h-[2.604vw] hover:opacity-80 bg-red/30 border-red py-[0.625vw] px-[2.031vw] rounded-full flex items-center justify-center"
           }
         >
           <span className={"text-red text-[1.042vw] font-lufga font-medium"}>
