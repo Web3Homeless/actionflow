@@ -66,7 +66,7 @@ export function ReceiveTokensNodeTrigger() {
                   "w-full rounded-full py-[0.365vw] px-[0.573vw] bg-white text-black text-[0.625vw]"
                 }
               >
-                Optimism Sepolia
+                Dope ERC20
               </span>
             </SelectItem>
           </SelectContent>
