@@ -7,3 +7,9 @@ export function cn(...inputs: ClassValue[]) {
 
 export const formatAddress = (address: string | undefined) =>
   address ? address.slice(0, 4) + "..." + address.slice(-4) : "None";
+
+export enum TokensType {
+  ETH = "ETH",
+  USDT = "USDT",
+  USDC = "USDC",
+}
