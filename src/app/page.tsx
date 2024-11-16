@@ -12,13 +12,21 @@ export default function Home() {
       <Header />
       <div className={"flex flex-row gap-[1.042vw] w-full h-full"}>
         <Modules />
-        <Workflow />
-        <div className={"w-[38%] h-full flex flex-col gap-[1.042vw]"}>
-          <div className={"bg-white rounded-[0.521vw] h-[10%] w-full"}></div>
-          <div className={"bg-white rounded-[0.521vw] h-full w-full"}>
-            <CodeEditor></CodeEditor>
-          </div>
-        </div>
+
+        <ResizablePanelGroup direction={"horizontal"} className={"w-full h-full"}>
+          <ResizablePanel>
+            <Workflow />
+          </ResizablePanel>
+
+          <ResizableHandle withHandle className={"w-[1.042vw] h-full bg-[#F5F5F5]"} />
+
+          <ResizablePanel defaultSize={28} className={"h-full flex flex-col gap-[1.042vw]"}>
+            <div className={"bg-white rounded-[0.521vw] h-[10%] w-full"}></div>
+            <div className={"bg-white rounded-[0.521vw] h-full w-full"}>
+              <CodeEditor></CodeEditor>
+            </div>
+          </ResizablePanel>
+        </ResizablePanelGroup>
       </div>
     </main>
   );
