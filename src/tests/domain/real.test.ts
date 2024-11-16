@@ -4,7 +4,7 @@ import { formatSolidity } from "../../domain/format";
 import { SendNode } from "../../domain/nodes/send-action-node";
 import { TransferTriggerNode } from "../../domain/nodes/transfer-trigger-node";
 
-describe("code generator", () => {
+describe("real test generation", () => {
   it("should correctly generate code", async () => {
     const node1 = new TransferTriggerNode({
       token: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
