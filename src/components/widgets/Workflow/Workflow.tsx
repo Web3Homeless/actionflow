@@ -1,5 +1,3 @@
-import { CONTRACT_TEMPLATE } from "@/domain/const";
-import { useWorkflowStore } from "@/store/workflowStore";
 import Canvas from "@/components/editor2/Canvas";
 import type { Node } from "@xyflow/react";
 

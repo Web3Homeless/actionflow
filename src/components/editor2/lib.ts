@@ -18,7 +18,7 @@ export const baseNodes = {
     id: "receiveTokens-1",
     type: "receiveTokensAction",
     position: { x: 400, y: 0 },
-    data: { type: TokensType.ETH, walletAddress: "", amount: 0 },
+    data: { type: "0x58d7f482ffd7bcd784a9c36d91a3a6010f096b73" },
   },
   swapTokens: {
     id: "swapToken-1",

@@ -60,31 +60,13 @@ export function ReceiveTokensNodeTrigger() {
             <SelectValue placeholder="Select token" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value={TokensType.ETH}>
+            <SelectItem value={"0x58d7f482ffd7bcd784a9c36d91a3a6010f096b73"}>
               <span
                 className={
                   "w-full rounded-full py-[0.365vw] px-[0.573vw] bg-white text-black text-[0.625vw]"
                 }
               >
-                {TokensType.ETH}
-              </span>
-            </SelectItem>
-            <SelectItem value={TokensType.USDC}>
-              <span
-                className={
-                  "w-full rounded-full py-[0.365vw] px-[0.573vw] bg-white text-black text-[0.625vw]"
-                }
-              >
-                {TokensType.USDC}
-              </span>
-            </SelectItem>
-            <SelectItem value={TokensType.USDT}>
-              <span
-                className={
-                  "w-full rounded-full py-[0.365vw] px-[0.573vw] bg-white text-black text-[0.625vw]"
-                }
-              >
-                {TokensType.USDT}
+                Optimism Sepolia
               </span>
             </SelectItem>
           </SelectContent>
