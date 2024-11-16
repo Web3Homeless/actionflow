@@ -17,6 +17,10 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { useAccount, useConnect } from "wagmi";
+import { deployContract } from "@wagmi/core";
+import { mainnet } from "wagmi/chains";
+import { config } from "@/config";
 
 // Worker ref
 const extensions = [solidity];
@@ -24,13 +28,24 @@ const extensions = [solidity];
 type CompilationData = {
   errors: any[];
   sources: any;
-  contracts: any[];
+  contracts: {
+    [fileName: string]: {
+      [contractName: string]: {
+        abi: any[];
+        evm: { bytecode: { object: string } };
+      };
+    };
+  };
 };
 
 export default function CodeEditor() {
   const { code, setCode, bytecode, setCompiledBytecode } = useWorkflowStore();
   const workerRef = useRef<Worker | null>(null);
   const { toast } = useToast();
+  const { address, isConnected } = useAccount();
+  const [deploying, setDeploying] = useState(false);
+
+  const isDisabledDeploy = (bytecode as CompilationData).errors != undefined || bytecode == "";
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -41,19 +56,16 @@ export default function CodeEditor() {
         const { output } = event.data;
         const outputData = output as CompilationData;
         setCompiledBytecode(output);
-        console.log("Please");
-        console.log("Compiled output:", outputData);
+
         if (outputData.errors) {
-          console.log("Errors in compilation:", outputData);
           toast({
             title: "Compilation failed",
-            description: "something went wrong...",
+            description: "Something went wrong...",
             variant: "destructive",
           });
         } else {
-          console.log("NO errors in compilation:", outputData);
           toast({
-            title: "Compilation succeed!",
+            title: "Compilation succeeded!",
             description: "Now you can deploy your contract",
             variant: "default",
           });
@@ -61,20 +73,51 @@ export default function CodeEditor() {
       });
 
       return () => {
-        // Clean up the worker on unmount
         workerRef.current?.terminate();
       };
     }
   }, []);
 
   const compileContract = () => {
-    console.log("COMPILE CONTRACT PRESSED");
     if (workerRef.current) {
-      console.log("POSTED");
       workerRef.current.postMessage({ contractCode: code });
     } else {
       console.error("Worker is not available.");
     }
+  };
+
+  const deploy = async () => {
+    if (!isConnected) {
+      toast({
+        title: "Not connected",
+        description: "Please connect your wallet before deploying.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const contract = bytecode.contracts[0];
+
+    console.log(contract);
+    console.log(bytecode);
+    console.log(bytecode.contracts.contract);
+    console.log(bytecode.contracts.contract.ActionFlowContract);
+    console.log(JSON.stringify(bytecode.contracts.contract.ActionFlowContract.abi));
+
+    const c = bytecode.contracts.contract.ActionFlowContract;
+
+    // Full bytecode (includes metadata and constructor)
+    const fullBytecode = c.evm.bytecode.object;
+
+    console.log(fullBytecode);
+
+    console.log("0x" + fullBytecode);
+
+    await deployContract(config, {
+      abi: c.abi,
+      args: [],
+      bytecode: "0x" + fullBytecode,
+    });
   };
 
   return (
@@ -87,9 +130,14 @@ export default function CodeEditor() {
           onChange={(value) => setCode(value)}
         />
       </div>
+      <Button onClick={compileContract} variant="outline">
+        COMPILE
+      </Button>
       <AlertDialog>
         <AlertDialogTrigger asChild>
-          <Button variant="outline">COMPILE</Button>
+          <Button disabled={isDisabledDeploy || deploying} variant="outline">
+            {deploying ? "DEPLOYING..." : "DEPLOY"}
+          </Button>
         </AlertDialogTrigger>
         <AlertDialogContent>
           <AlertDialogHeader>
@@ -100,24 +148,9 @@ export default function CodeEditor() {
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={compileContract}>Compile</AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
-      <AlertDialog>
-        <AlertDialogTrigger asChild>
-          <Button variant="outline">DEPLOY</Button>
-        </AlertDialogTrigger>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Вы уверены?</AlertDialogTitle>
-            <AlertDialogDescription>
-              Если эту хуйню задеплоить и вас заскамят - мы не виноваты
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={compileContract}>Compile</AlertDialogAction>
+            <AlertDialogAction onClick={async () => await deploy()}>
+              {deploying ? "Deploying..." : "Deploy"}
+            </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
