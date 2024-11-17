@@ -5,7 +5,7 @@ import { arbitrumSepolia, sepolia, polygonZkEvm, optimismSepolia } from "@reown/
 // Get projectId from https://cloud.reown.com
 export const projectId = process.env.NEXT_PUBLIC_PROJECT_ID;
 
-export const networks = [arbitrumSepolia, sepolia, polygonZkEvm, optimismSepolia];
+export const networks = [optimismSepolia, arbitrumSepolia, sepolia, polygonZkEvm];
 
 if (!projectId) throw new Error("Project ID is not defined");
 
