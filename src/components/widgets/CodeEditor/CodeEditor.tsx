@@ -213,10 +213,14 @@ export default function CodeEditor() {
           onChange={(value) => setCode(value)}
         />
       </div>
-      <div className={"flex w-[90%] flex-row justify-center items-center gap-[0.26vw]"}>
+      <div
+        className={
+          "flex w-[90%] rounded-full mb-[0.521vw] bg-gradient-to-r from-[#FF603A] to-[#F3B440] flex-row justify-center items-center gap-0"
+        }
+      >
         <button
           className={
-            "flex w-[90%] my-[0.521vw] hover:opacity-80 flex-row bg-gradient-to-r from-[#FF603A] to-[#F3B440] justify-center items-center py-[0.781vw] px-[1.25vw] rounded-full gap-[0.521vw]"
+            "flex w-[90%] ml-[0.521vw] border-r border-white hover:opacity-80 flex-row justify-center items-center py-[0.781vw] px-[1.25vw] rounded-tl-full rounded-bl-full gap-[0.521vw]"
           }
           onClick={async () => await deploy()}
         >
@@ -224,7 +228,7 @@ export default function CodeEditor() {
         </button>
         <button
           className={
-            "flex w-[90%] my-[0.521vw] hover:opacity-80 flex-row bg-gradient-to-r from-[#FF603A] to-[#F3B440] justify-center items-center py-[0.781vw] px-[1.25vw] rounded-full gap-[0.521vw]"
+            "flex w-[90%] mr-[0.521vw] hover:opacity-80 flex-row justify-center items-center py-[0.781vw] px-[1.25vw] rounded-tr-full rounded-br-full rounded-full gap-[0.521vw]"
           }
           onClick={compileContract}
         >
