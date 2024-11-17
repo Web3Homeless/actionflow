@@ -34,7 +34,7 @@ struct Proof {
     CallAssumptions callAssumptions;
 }
 // VLayer prover
-address constant vlayerProver = address(0x62167D939D60716567825d0da260335F1BEA15eb);
+address constant vlayerProver = address(0xbaABbF82c5d94E0CE4c2A57466B4Bb1aaeeee0B1);
 
 ${PRE_CONTRACT_DECLARATIONS}
 
