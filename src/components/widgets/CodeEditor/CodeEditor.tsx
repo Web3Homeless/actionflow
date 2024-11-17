@@ -116,13 +116,13 @@ export default function CodeEditor() {
       //@ts-ignore
       const contract = bytecode.contracts[0];
 
-      // console.log(contract);
-      // console.log(bytecode);
-      // console.log(bytecode.contracts.contract);
-      // console.log(bytecode.contracts.contract.ActionFlowContract);
-      // console.log(JSON.stringify(bytecode.contracts.contract.ActionFlowContract.abi));
+      console.log(bytecode);
+
+      console.log(bytecode.contracts.contract.ActionFlowContract);
       //@ts-ignore
       const c = bytecode.contracts.contract.ActionFlowContract;
+
+      console.log(c);
 
       // Full bytecode (includes metadata and constructor)
 
