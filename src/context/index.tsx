@@ -35,7 +35,7 @@ const metadata = {
 export const modal = createAppKit({
   adapters: [wagmiAdapter],
   projectId,
-  networks: [optimismSepolia, arbitrumSepolia, sepolia, polygonZkEvm],
+  networks: [optimismSepolia, arbitrumSepolia, sepolia, polygonZkEvm, optimismSepolia],
   metadata: metadata,
   features: {
     analytics: true, // Optional - defaults to your Cloud configuration
