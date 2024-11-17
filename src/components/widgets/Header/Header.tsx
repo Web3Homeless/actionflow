@@ -16,6 +16,7 @@ import etherImg from "../../../../public/icons/ether.svg";
 import { useAccount } from "wagmi";
 import { formatAddress } from "@/lib/utils";
 import { modal } from "@/context";
+import logoImg from "../../../../public/logo.svg";
 
 export default function Header() {
   const [dropdownPosition, setDropdownPosition] = useState("bottom");
@@ -30,7 +31,7 @@ export default function Header() {
       }
     >
       <div className={"w-[38%] text-red font-lufga text-[1.823vw] font-semibold text-left"}>
-        ActionFlow
+        <Image src={logoImg} alt={"Logo"} className={"w-[15.625vw]"} />
       </div>
       <div className={"w-full gap-[2.083vw] flex flex-row items-center justify-center"}>
         <DropdownMenu open={leftOpen} onOpenChange={setLeftOpen}>
