@@ -19,11 +19,7 @@ import { TwitterTriggerNode } from "@/domain/nodes/twitter-trigger-node";
 import { generateCode } from "@/domain/codegen";
 
 export default function Home() {
-  const [nodes, setNodes] = useState<Node[]>([
-    baseNodes.twitterPost,
-    baseNodes.receiveTokens,
-    baseNodes.sendTokens,
-  ]);
+  const [nodes, setNodes] = useState<Node[]>([]);
 
   const { nodes: n, setCode } = useWorkflowStore();
 
@@ -46,32 +42,37 @@ export default function Home() {
     let resultTriggerNode = undefined;
     let resultActionNode = undefined;
 
-    if (triggerNode?.type == "receive") {
+    if (triggerNode?.type == "recieve") {
       const data = triggerNode.data;
       resultTriggerNode = new TransferTriggerNode({
-        token: "",
+        token: "0x58d7f482ffd7bcd784a9c36d91a3a6010f096b73",
       });
     }
     if (triggerNode?.type == "twitter") {
       const data = triggerNode.data;
-      resultTriggerNode = new TwitterTriggerNode({
-        account: "",
-      });
+      // resultTriggerNode = new TwitterTriggerNode({
+      //   address: data.account,
+      // });
     }
     if (actionNode?.type == "send") {
       const data = actionNode.data;
       resultActionNode = new SendNode({
-        account: "",
-        amount: "",
-        token: "",
+        account: data.userAddress ?? "0x17C7e082ca151FF73D7b5fC8F020cE0213695c57",
+        amount: data.amount ?? 1,
+        token: "0x58d7f482ffd7bcd784a9c36d91a3a6010f096b73",
       });
     }
+
+    console.log("WTF");
+
+    console.log("Result Trigger Node:", triggerNode);
+    console.log("Result Action Node:", actionNode);
 
     if (!resultTriggerNode) return;
     if (!resultActionNode) return;
     resultTriggerNode.nextNode = resultActionNode;
-    // const resultCode = generateCode(resultTriggerNode!);
-    // setCode(resultCode);
+    const resultCode = generateCode(resultTriggerNode!);
+    setCode(resultCode);
   };
 
   return (

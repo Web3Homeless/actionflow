@@ -38,7 +38,7 @@ address constant vlayerProver = address(0x62167D939D60716567825d0da260335F1BEA15
 
 ${PRE_CONTRACT_DECLARATIONS}
 
-contract Actionflow {
+contract ActionFlowContract {
   ${CONTRACT_STATE_DECLARATIONS}
 
   bool public isFrozen = false;
